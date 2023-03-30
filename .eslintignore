@@ -1,0 +1,7 @@
+dist
+temp
+**/*.config.js
+**/*.config.ts
+**/*.eslintrc.js
+/crates
+typedoc.ts

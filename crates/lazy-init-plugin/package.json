@@ -1,0 +1,12 @@
+{
+   "name": "lazy-init-plugin",
+   "version": "1.0.0",
+   "license": "AGPL-3.0-only",
+   "description": "SWC plugin for use with lazy-init.",
+   "private": true,
+   "scripts": {
+      "build": "./scripts/build.sh",
+      "test": "./scripts/test.sh",
+      "test:one": "./scripts/test.sh --one"
+   }
+}

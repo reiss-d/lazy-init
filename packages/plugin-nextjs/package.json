@@ -1,0 +1,41 @@
+{
+   "name": "@lazy-init/nextjs-plugin",
+   "version": "1.0.0",
+   "license": "AGPL-3.0-only",
+   "description": "SWC plugin for use with lazy-init.",
+   "homepage": "https://github.com/reiss-d/lazy-init#readme",
+   "repository": "https://github.com/reiss-d/lazy-init.git",
+   "bugs": "https://github.com/reiss-d/lazy-init/issues",
+   "author": "Reiss Davidson",
+   "main": "dist/swc_plugin_lazy_init.wasm",
+   "scripts": {
+      "build": "tsc",
+      "postinstall": "node dist/postinstall.js",
+      "prepack": "shx rm -f dist/swc_plugin_lazy_init.wasm"
+   },
+   "peerDependencies": {
+      "next": "^13.1.4"
+   },
+   "dependencies": {
+      "plugin-common": "workspace:*",
+      "semver": "^7.3.8"
+   },
+   "devDependencies": {
+      "@types/node": "^18.15.11",
+      "eslint-config-internal-base": "workspace:*",
+      "tsconfig": "workspace:*",
+      "typescript": "^4.9.5"
+   },
+   "files": [
+      "dist",
+      "package.json",
+      "LICENSE"
+   ],
+   "preferUnplugged": true,
+   "keywords": [
+      "lazy",
+      "lazy-init-plugin",
+      "swc",
+      "swc-plugin"
+   ]
+}

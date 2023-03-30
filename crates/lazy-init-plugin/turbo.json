@@ -1,0 +1,25 @@
+{
+   "$schema": "https://turbo.build/schema.json",
+   "extends": ["//"],
+   "pipeline": {
+      "build": {
+         "dependsOn": ["^build"],
+         "inputs": [
+            "scripts/**",
+            "src/**",
+            "!src/tests/**",
+            "Cargo.toml",
+            "../../.cargo/config.toml"
+         ]
+      },
+      "test": {
+         "dependsOn": ["^build"],
+         "inputs": [
+            "scripts/**",
+            "src/**",
+            "Cargo.toml",
+            "../../.cargo/config.toml"
+         ]
+      }
+   }
+}

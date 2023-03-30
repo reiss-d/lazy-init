@@ -1,0 +1,13 @@
+{
+   "name": "eslint-config-internal-ts",
+   "version": "0.0.0",
+   "private": true,
+   "main": "index.js",
+   "dependencies": {
+      "eslint-config-internal-base": "workspace:*",
+      "eslint-plugin-lazy-init": "workspace:*"
+   },
+   "publishConfig": {
+      "access": "restricted"
+   }
+}

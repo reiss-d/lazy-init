@@ -1,0 +1,48 @@
+{
+   "name": "eslint-plugin-lazy-init",
+   "version": "1.0.0",
+   "license": "AGPL-3.0-only",
+   "description": "Eslint plugin for use with lazy-init.",
+   "homepage": "https://github.com/reiss-d/lazy-init#readme",
+   "repository": "https://github.com/reiss-d/lazy-init.git",
+   "bugs": "https://github.com/reiss-d/lazy-init/issues",
+   "main": "dist/index.js",
+   "types": "index.d.ts",
+   "files": [
+      "dist",
+      "index.d.ts",
+      "package.json",
+      "LICENSE"
+   ],
+   "sideEffects": false,
+   "scripts": {
+      "build": "tsc -b tsconfig.build.json",
+      "test": "jest"
+   },
+   "dependencies": {
+      "tslib": "^2.5.0",
+      "tsutils": "^3.21.0"
+   },
+   "peerDependencies": {
+      "@typescript-eslint/eslint-plugin": "^5.0.0",
+      "@typescript-eslint/parser": "^5.0.0",
+      "@typescript-eslint/utils": "^5.0.0",
+      "eslint": "^6.0.0 || ^7.0.0 || ^8.0.0"
+   },
+   "devDependencies": {
+      "@typescript-eslint/eslint-plugin": "^5.54.0",
+      "@typescript-eslint/utils": "^5.54.0",
+      "eslint-config-internal-base": "workspace:*",
+      "tsconfig": "workspace:*",
+      "tsup": "^6.6.3",
+      "typescript": "^4.9.5"
+   },
+   "keywords": [
+      "eslint",
+      "eslintplugin",
+      "eslint-plugin",
+      "lazy",
+      "lazy-init",
+      "lazy-init-plugin"
+   ]
+}

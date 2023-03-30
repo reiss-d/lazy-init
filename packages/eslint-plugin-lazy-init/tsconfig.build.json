@@ -1,0 +1,26 @@
+{
+   "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "allowUnreachableCode": false,
+      "allowUnusedLabels": false,
+      "esModuleInterop": true,
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noImplicitReturns": true,
+      "pretty": true,
+      "skipLibCheck": true,
+      "sourceMap": true,
+      "strict": true,
+      "importHelpers": true,
+      "target": "es2017",
+      "lib": ["es2017"],
+      "paths": {},
+      "declaration": false,
+      "declarationMap": false,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "resolveJsonModule": true,
+      "noImplicitAny": false
+   },
+   "include": ["src"]
+}

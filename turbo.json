@@ -1,0 +1,50 @@
+{
+   "$schema": "https://turbo.build/schema.json",
+   "globalDependencies": [
+      ".env.development",
+      ".env.production"
+   ],
+   "globalEnv": ["NODE_ENV"],
+   "pipeline": {
+      "build": {
+         "dependsOn": ["^build"],
+         "inputs": [
+            "src/**/*.ts",
+            "src/**/*.tsx",
+            "tsup.config.ts",
+            "tsconfig.json",
+            "tsconfig.build.json"
+         ],
+         "outputs": ["dist/**"],
+         "outputMode": "new-only"
+      },
+      "test": {
+         "dependsOn": [],
+         "inputs": [
+            "src/**/*.ts",
+            "src/**/*.tsx",
+            "tests/**/*.ts",
+            "jest.config.js",
+            "tsconfig.json"
+         ],
+         "outputs": [],
+         "outputMode": "new-only"
+      },
+      "dev": {
+         "cache": false,
+         "outputMode": "new-only"
+      },
+      "bench": {
+         "dependsOn": [],
+         "cache": false,
+         "outputMode": "new-only"
+      },
+      "typedoc": {
+         "dependsOn": [],
+         "cache": false
+      },
+      "release": {
+         "dependsOn": ["test", "build"]
+      }
+   }
+}

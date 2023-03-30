@@ -1,0 +1,43 @@
+{
+   "$schema": "https://json.schemastore.org/tsconfig",
+   "display": "Default",
+   "ts-node": {
+      "swc": true,
+      "transpileOnly": true,
+      "compilerOptions": {
+         "module": "CommonJS",
+         "esModuleInterop": true,
+         "moduleResolution": "Node"
+      }
+   },
+   "compilerOptions": {
+      "target": "ESNext",
+      "lib": ["ES2020"],
+      "module": "ESNext",
+      "moduleResolution": "node",
+      "esModuleInterop": true,
+      "isolatedModules": true,
+      "resolveJsonModule": true,
+      "allowSyntheticDefaultImports": true,
+      "importHelpers": true,
+      "strict": true,
+
+      "composite": false,
+      "declaration": true,
+      "declarationMap": true,
+      "inlineSources": false,
+      "skipLibCheck": true,
+      "skipDefaultLibCheck": true,
+      "noErrorTruncation": true,
+      "forceConsistentCasingInFileNames": true,
+
+      "strictNullChecks": true,
+      "noImplicitAny": false,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false,
+      "noImplicitOverride": true,
+      "noUncheckedIndexedAccess": true,
+      "noFallthroughCasesInSwitch": true
+   },
+   "exclude": ["node_modules"]
+}

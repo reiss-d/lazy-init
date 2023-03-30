@@ -1,0 +1,57 @@
+{
+   "name": "lazy-init-repo",
+   "version": "0.0.0",
+   "license": "AGPL-3.0-only",
+   "description": "Lazily initialize values by deferring their creation until first use, resulting in better performance.",
+   "workspaces": [
+      "configs/*",
+      "crates/*",
+      "packages/*"
+   ],
+   "private": true,
+   "homepage": "https://github.com/reiss-d/lazy-init#readme",
+   "repository": "https://github.com/reiss-d/lazy-init.git",
+   "bugs": "https://github.com/reiss-d/lazy-init/issues",
+   "author": "Reiss Davidson",
+   "scripts": {
+      "e:dev": "dotenv -e .env.development --",
+      "e:prod": "dotenv -e .env.production --",
+
+      "build": "pnpm e:dev turbo run build",
+      "build:pkgs": "pnpm e:dev turbo run build --filter=./packages/*",
+      "build:crates": "pnpm e:dev turbo run build --filter=./crates/*",
+
+      "test": "pnpm e:dev pnpm install && turbo run test",
+      "test:pkgs": "pnpm e:dev turbo run test --filter=./packages/*",
+      "test:crates": "pnpm e:dev turbo run test --filter=./crates/*",
+
+      "typedoc": "pnpm e:dev turbo run typedoc",
+      "bench": "pnpm e:dev turbo run bench --filter=./packages/benchmark",
+      "release": "pnpm e:prod turbo run release --no-cache --force && pnpm publish -r",
+
+      "plugin:postinstall": "pnpm e:dev pnpm install",
+      "build:plugins": "pnpm e:dev turbo run build --filter=./**/plugin-* && pnpm plugin:postinstall"
+   },
+   "devDependencies": {
+      "@types/jest": "^29.5.0",
+      "@types/node": "^18.15.11",
+      "dotenv-cli": "^7.1.0",
+      "jest": "^29.5.0",
+      "shx": "^0.3.4",
+      "turbo": "^1.8.8",
+      "typedoc": "0.23.26",
+      "typedoc-plugin-markdown": "^3.14.0",
+      "typedoc-plugin-missing-exports": "^1.0.0"
+   },
+   "keywords": [
+      "cache",
+      "defer",
+      "hoist",
+      "initialise",
+      "initialize",
+      "lazy",
+      "lazily",
+      "static",
+      "swc-plugin"
+   ]
+}

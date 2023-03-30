@@ -1,0 +1,17 @@
+{
+   "name": "eslint-config-internal-base",
+   "version": "0.0.0",
+   "private": true,
+   "main": "index.js",
+   "dependencies": {
+      "@typescript-eslint/eslint-plugin": "^5.53.0",
+      "@typescript-eslint/parser": "^5.53.0",
+      "eslint": "^8.34.0",
+      "eslint-config-turbo": "^1.8.8",
+      "eslint-import-resolver-typescript": "^3.5.3",
+      "eslint-plugin-import": "^2.27.5"
+   },
+   "publishConfig": {
+      "access": "restricted"
+   }
+}

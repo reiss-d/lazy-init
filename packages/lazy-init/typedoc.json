@@ -1,0 +1,12 @@
+{
+   "$schema": "https://typedoc.org/schema.json",
+   "entryPoints": [
+      "src/base.ts",
+      "src/methods/obj.ts",
+      "src/methods/async.ts",
+      "src/methods/fn.ts"
+   ],
+   "out": "docs",
+   "entryPointStrategy": "resolve",
+   "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-missing-exports"]
+}

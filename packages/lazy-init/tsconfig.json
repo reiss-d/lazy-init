@@ -1,0 +1,12 @@
+{
+   "extends": "tsconfig/base.json",
+   "compilerOptions": {
+      "outDir": "tdist",
+      "paths": {
+         "lazy-init": ["./src/index.ts"],
+         "lazy-init/cache": ["./src/cache.ts"]
+      },
+      "types": ["jest", "node"]
+   },
+   "include": ["src", "tests"]
+}

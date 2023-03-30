@@ -1,0 +1,22 @@
+{
+   "$schema": "https://turbo.build/schema.json",
+   "extends": ["//"],
+   "pipeline": {
+      "build": {
+         "dependsOn": ["^build", "lazy-init-plugin#build"],
+         "inputs": [
+            "src/**/*.ts",
+            "src/**/*.tsx",
+            "tsup.config.ts",
+            "tsconfig.json",
+            "tsconfig.build.json",
+            "../../README.md"
+         ]
+      },
+      "test": {
+         "dependsOn": ["^build", "lazy-init-plugin#build"],
+         "env": ["LAZY_INIT_DEV_NO_CACHE"],
+         "outputs": []
+      }
+   }
+}

@@ -1,0 +1,23 @@
+[workspace]
+members = [
+  "crates/lazy-init-plugin",
+]
+
+[profile.dev]
+incremental = true
+codegen-units = 256
+debug = true
+debug-assertions = true
+lto = false
+opt-level = 0
+
+[profile.release]
+incremental = false
+codegen-units = 16
+debug = false
+debug-assertions = false
+lto = true
+# Optimize for size
+opt-level = "s"
+# Strip debug symbols
+strip = "symbols"

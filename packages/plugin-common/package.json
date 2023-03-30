@@ -1,0 +1,24 @@
+{
+   "name": "plugin-common",
+   "version": "0.0.0",
+   "private": true,
+   "main": "dist/index.js",
+   "types": "dist/index.d.ts",
+   "scripts": {
+      "build": "tsc"
+   },
+   "dependencies": {
+      "shelljs": "^0.8.5"
+   },
+   "devDependencies": {
+      "@types/shelljs": "^0.8.11",
+      "@types/node": "^18.15.11",
+      "eslint-config-internal-base": "workspace:*",
+      "tsconfig": "workspace:*",
+      "typescript": "^4.9.5"
+   },
+   "files": [
+      "dist",
+      "package.json"
+   ]
+}
