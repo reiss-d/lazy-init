@@ -1,6 +1,6 @@
 {
    "name": "lazy-init-plugin",
-   "version": "1.0.0",
+   "version": "2.1.0",
    "license": "AGPL-3.0-only",
    "description": "SWC plugin for use with lazy-init.",
    "private": true,
