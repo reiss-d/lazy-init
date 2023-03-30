@@ -17,7 +17,7 @@
       "next": "^13.1.4"
    },
    "dependencies": {
-      "plugin-common": "workspace:*",
+      "@lazy-init/plugin-common": "workspace:*",
       "semver": "^7.3.8"
    },
    "devDependencies": {

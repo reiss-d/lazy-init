@@ -1,5 +1,5 @@
 import { satisfies } from 'semver'
-import { type Utils, copyPlugin, createUtils } from 'plugin-common'
+import { type Utils, copyPlugin, createUtils } from '@lazy-init/plugin-common'
 
 postInstall()
 
@@ -12,10 +12,10 @@ function postInstall() {
    // >= 1.3.38 => [v061_64]
    // >= 1.3.29 => [v054_59]
 
-   copyPlugin('swc-core', __dirname, (nextVersion) => {
-      const check = (range: string) => satisfies(nextVersion, range)
+   copyPlugin('swc-core', __dirname, (version) => {
+      const check = (range: string) => satisfies(version, range)
       const unsupported = () =>
-         utils.logger.throw(`Unsupported @swc/core version: ${nextVersion}`)
+         utils.logger.throw(`Unsupported @swc/core version: ${version}`)
 
       if (check('>= 1.3.40')) { return 'v069' }
       if (check('1.3.39')) { return unsupported() }
