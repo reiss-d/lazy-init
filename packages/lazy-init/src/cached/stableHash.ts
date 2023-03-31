@@ -67,6 +67,9 @@ export const stableHash = (value: any): string => {
       case 'string': {
          return JSON.stringify(value)
       }
+      case 'bigint': {
+         return '' + value + 'n'
+      }
       default: {
          return '' + value
       }
