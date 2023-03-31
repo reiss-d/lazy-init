@@ -82,13 +82,12 @@ export default {
 
 <h3 id="swc-setup">SWC - @swc/core</h3>
 
-|   Version   |  Supported  |
-| :---------- |:-----------:|
-| `>= 1.3.40` |      ✅     |
-| `1.3.39`    |      ❌     |
-| `1.3.38`    |      ✅     |
-| `>= 1.3.29` |      ✅     |
-| `< 1.3.29`  |      ❌     |
+|       Version         |  Supported  |
+| :-------------------- |:-----------:|
+| `>= 1.3.40 <= 1.3.42` |      ✅     |
+| `1.3.39`              |      ❌     |
+| `>= 1.3.29 <= 1.3.38` |      ✅     |
+| `< 1.3.29`            |      ❌     |
 
 The `@swc/core` package must be installed first and present in your `package.json` **before** installing `lazy-init`.
 
