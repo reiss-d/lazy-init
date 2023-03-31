@@ -7,20 +7,20 @@ function postInstall() {
    // assertions require explicit type annotation
    const utils: Utils = createUtils('swc-core')
 
-   // >= 1.3.40 => [v069]
-   // >= 1.3.39 => [v066_68] unsupported
-   // >= 1.3.38 => [v061_64]
-   // >= 1.3.29 => [v054_59]
-
    copyPlugin('swc-core', __dirname, (version) => {
       const check = (range: string) => satisfies(version, range)
       const unsupported = () =>
          utils.logger.throw(`Unsupported @swc/core version: ${version}`)
 
-      if (check('>= 1.3.40')) { return 'v069' }
-      if (check('1.3.39')) { return unsupported() }
+      // TODO: implement `v0724`
+      // TODO: change `v069` to `v069_723`
+      // if (check('>= 1.3.44')) { return 'v0724' }
+      // if (check('>= 1.3.40 <= 1.3.42')) { return 'v069_723' }
+
+      if (check('>= 1.3.43')) { return unsupported() }
+      if (check('>= 1.3.40 <= 1.3.42')) { return 'v069' }
       if (check('1.3.38')) { return 'v061_64' }
-      if (check('>= 1.3.29')) { return 'v054_59' }
+      if (check('>= 1.3.29 <= 1.3.37')) { return 'v054_59' }
 
       return unsupported()
    })
