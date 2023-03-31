@@ -32,11 +32,14 @@ This library **requires** your code is transpilied with [SWC](https://swc.rs).
 
 <h3 id="next-js-setup">Next.js</h3>
 
+
 |       Version        |  Supported  |
 | :------------------- |:-----------:|
-| `>= 13.2.5-canary.5` |      ✅     |
+| `>= 13.2.4`          |     :bug:   |
 | `>= 13.1.4`          |      ✅     |
 | `< 13.1.4`           |      ❌     |
+
+> Next.js v13.2.4 and up cannot execute SWC Wasm plugins, [due to a bug](https://github.com/vercel/next.js/issues/46989#issuecomment-1486989081). Support will be added once it is fixed.
 
 The `next` package must be installed first and present in your `package.json` **before** installing `lazy-init`.
 
