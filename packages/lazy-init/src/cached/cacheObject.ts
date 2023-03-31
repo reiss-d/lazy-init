@@ -24,11 +24,18 @@ const noCacheInDevelopment = isDevelopment &&
    process.env.LAZY_INIT_DEV_NO_CACHE === 'true'
 
 export const cacheObject = <T>(value: T, isFrozen?: boolean): T => {
-   if (noCacheInDevelopment) { return value }
+   // do not cache non-object/null values
+   if (
+      noCacheInDevelopment ||
+      typeof value !== 'object' ||
+      value === null
+   ) {
+      return value
+   }
 
-   const store = isFrozen ? cacheStoreFrozen : cacheStore
    try {
       const hash = stableHash(value)
+      const store = isFrozen ? cacheStoreFrozen : cacheStore
       let obj = store.get(hash) as T | undefined
 
       if (obj === undefined) {
