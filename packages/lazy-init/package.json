@@ -1,7 +1,7 @@
 {
    "name": "lazy-init",
    "version": "2.2.0",
-   "license": "AGPL-3.0-only",
+   "license": "MIT",
    "description": "Lazily initialize values by deferring their creation until first use, resulting in better performance.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
    "repository": "https://github.com/reiss-d/lazy-init.git",

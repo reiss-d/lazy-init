@@ -1,7 +1,7 @@
 {
    "name": "lazy-init-repo",
    "version": "0.0.0",
-   "license": "AGPL-3.0-only",
+   "license": "MIT",
    "description": "Lazily initialize values by deferring their creation until first use, resulting in better performance.",
    "workspaces": [
       "configs/*",

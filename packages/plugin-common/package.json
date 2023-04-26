@@ -1,6 +1,7 @@
 {
    "name": "@lazy-init/plugin-common",
    "version": "2.2.0",
+   "license": "MIT",
    "main": "dist/index.js",
    "types": "dist/index.d.ts",
    "scripts": {

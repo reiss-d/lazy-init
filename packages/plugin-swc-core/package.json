@@ -1,7 +1,7 @@
 {
    "name": "@lazy-init/swc-core-plugin",
    "version": "2.2.0",
-   "license": "AGPL-3.0-only",
+   "license": "MIT",
    "description": "SWC plugin for use with lazy-init.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
    "repository": "https://github.com/reiss-d/lazy-init.git",

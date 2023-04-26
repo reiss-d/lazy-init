@@ -1,7 +1,7 @@
 {
    "name": "eslint-plugin-lazy-init",
    "version": "2.1.0",
-   "license": "AGPL-3.0-only",
+   "license": "MIT",
    "description": "Eslint plugin for use with lazy-init.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
    "repository": "https://github.com/reiss-d/lazy-init.git",
