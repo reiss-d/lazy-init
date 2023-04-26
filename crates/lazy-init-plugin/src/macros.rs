@@ -14,6 +14,9 @@ macro_rules! some_or_return {
     ($option:expr) => {
         unwrap_or!($option, return)
     };
+    ($option:expr, $ret:expr) => {
+        unwrap_or!($option, return $ret)
+    };
 }
 
 #[macro_export]
@@ -24,11 +27,10 @@ macro_rules! equals_or_return {
             return;
         }
     };
-    ($a:expr, $b:expr, $before_return:expr) => {
+    ($a:expr, $b:expr, $ret:expr) => {
         if $a == $b {
         } else {
-            $before_return;
-            return;
+            return $ret;
         }
     };
 }

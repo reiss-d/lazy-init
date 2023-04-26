@@ -15,7 +15,7 @@
    "typescript.tsdk": "node_modules/typescript/lib",
    "rust-analyzer.check.allTargets": false,
    "rust-analyzer.cargo.features": [
-      "use-swc_core_v054_59",
+      "use-swc_core_v075",
       "use-testing",
       "use-plugin_transform"
    ],
@@ -25,7 +25,7 @@
       "clippy",
       "--workspace",
       "--features",
-      "use-swc_core_v054_59 use-testing use-plugin_transform",
+      "use-swc_core_v075 use-testing use-plugin_transform",
       "--all-targets",
       "--tests",
       "--examples",

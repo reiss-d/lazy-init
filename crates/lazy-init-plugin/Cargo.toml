@@ -11,54 +11,40 @@ version = "0.0.1"
 crate-type = ["cdylib", "rlib"]
 
 [features]
-use-swc_core_v069 = ["swc_core_v069"]
-# v066_68 dropped due to https://github.com/swc-project/swc/issues/7053
-# use-swc_core_v066_68 = ["swc_core_v066_68"]
-use-swc_core_v061_64 = ["swc_core_v061_64"]
-use-swc_core_v054_59 = ["swc_core_v054_59"]
+use-swc_core_v075 = ["swc_core_v075"]
+# use-swc_core_v069 = ["swc_core_v069"]
 
 use-testing = [
-  "swc_core_v069?/ecma_parser",
-  "swc_core_v069?/ecma_transforms",
-  "swc_core_v069?/testing_transform",
+  "swc_core_v075?/ecma_parser",
+  "swc_core_v075?/ecma_transforms",
+  "swc_core_v075?/testing_transform",
   #
-  "swc_core_v061_64?/ecma_parser",
-  "swc_core_v061_64?/ecma_transforms",
-  "swc_core_v061_64?/testing_transform",
-  #
-  "swc_core_v054_59?/ecma_parser",
-  "swc_core_v054_59?/ecma_transforms",
-  "swc_core_v054_59?/testing_transform",
+  # "swc_core_v069?/ecma_parser",
+  # "swc_core_v069?/ecma_transforms",
+  # "swc_core_v069?/testing_transform",
   #
   "testing",
 ]
 use-plugin_transform = [
-  "swc_core_v069?/ecma_plugin_transform",
-  "swc_core_v061_64?/ecma_plugin_transform",
-  "swc_core_v054_59?/ecma_plugin_transform",
+  "swc_core_v075?/ecma_plugin_transform",
+  # "swc_core_v069?/ecma_plugin_transform",
   "rand",
 ]
 
 [dependencies]
 rand = { version = "0.8.5", optional = true }
-swc_core_v069 = { package = "swc_core", version = "0.69.0", optional = true, features = [
+swc_core_v075 = { package = "swc_core", version = "0.75.36", optional = true, features = [
   "ecma_utils",
   "ecma_visit",
   "ecma_ast",
   "common",
 ] }
-swc_core_v061_64 = { package = "swc_core", version = "0.64.10", optional = true, features = [
-  "ecma_utils",
-  "ecma_visit",
-  "ecma_ast",
-  "common",
-] }
-swc_core_v054_59 = { package = "swc_core", version = "0.59.40", optional = true, features = [
-  "ecma_utils",
-  "ecma_visit",
-  "ecma_ast",
-  "common",
-] }
+# swc_core_v069 = { package = "swc_core", version = "0.69.0", optional = true, features = [
+#   "ecma_utils",
+#   "ecma_visit",
+#   "ecma_ast",
+#   "common",
+# ] }
 
 serde_json = "1"
 serde = { version = "1.0.152", features = ["derive"] }
