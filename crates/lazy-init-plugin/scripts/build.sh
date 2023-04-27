@@ -17,7 +17,7 @@ for version in "${versions[@]}"; do
     #   continue
     # fi
 
-    cp ../../target/wasm32-wasi/release/swc_plugin_lazy_init.wasm ../../packages/"$pkg"/dist/swc_plugin_lazy_init_"$version".wasm
+    cp ../../target/wasm32-wasi/release/swc_plugin_lazy_init.wasm ../../packages/"$pkg"/dist/swc_plugin_lazy_init_v"$version".wasm
 
   done
 
