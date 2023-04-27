@@ -24,7 +24,9 @@
    },
    "typesVersions": {
       "*": {
-         "cache": ["dist/cache.d.ts"]
+         "cache": [
+            "dist/cache.d.ts"
+         ]
       }
    },
    "main": "./dist/index.js",
@@ -43,14 +45,14 @@
    "devDependencies": {
       "@lazy-init/swc-core-plugin": "workspace:*",
       "@swc/cli": "^0.1.62",
-      "@swc/core": "1.3.40",
-      "@swc/helpers": "^0.4.14",
-      "@swc/jest": "^0.2.24",
+      "@swc/core": "1.3.55",
+      "@swc/helpers": "^0.5.1",
+      "@swc/jest": "^0.2.26",
       "eslint-config-internal-ts": "workspace:*",
       "eslint-plugin-lazy-init": "workspace:*",
       "tsconfig": "workspace:*",
-      "tsup": "^6.6.3",
-      "typescript": "^4.9.5"
+      "tsup": "^6.7.0",
+      "typescript": "^5.0.4"
    },
    "keywords": [
       "cache",
