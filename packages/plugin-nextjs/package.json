@@ -14,7 +14,7 @@
       "prepack": "shx rm -f dist/swc_plugin_lazy_init.wasm"
    },
    "peerDependencies": {
-      "next": ">= 13.1.4 <= 13.2.3"
+      "next": ">= 13.3.1-canary.12"
    },
    "dependencies": {
       "@lazy-init/plugin-common": "workspace:*",

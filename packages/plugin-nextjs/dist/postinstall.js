@@ -9,9 +9,11 @@ function postInstall() {
     (0, plugin_common_1.copyPlugin)('nextjs', __dirname, (version) => {
         const check = (range) => (0, semver_1.satisfies)(version, range);
         const unsupported = () => utils.logger.throw(`Unsupported Next.js version: ${version}`);
-        // if (check('>= 13.2.5-canary.5')) { return 'v069' }
+        if (check('>= 13.3.1-canary.12')) {
+            return 'v075';
+        }
         if (check('>= 13.1.4 <= 13.2.3')) {
-            return 'v054_59';
+            return utils.downgrade(version, '2.2.0');
         }
         return unsupported();
     });

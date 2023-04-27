@@ -1,14 +1,7 @@
 import path from 'path'
 import { cp } from 'shelljs'
-import { createUtils } from './utils'
+import { createUtils, getTargetPkgName } from './utils'
 import type { GetCoreVersion, Targets, Utils } from './types'
-
-const getTargetPkgName = (target: Targets) => {
-   if (target === 'nextjs') { return 'next' }
-   if (target === 'swc-core') { return '@swc/core' }
-   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-   throw new Error(`Invalid target: ${target}`)
-}
 
 const shouldSkip = () => {
    try {

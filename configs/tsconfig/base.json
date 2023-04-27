@@ -19,7 +19,6 @@
       "isolatedModules": true,
       "resolveJsonModule": true,
       "allowSyntheticDefaultImports": true,
-      "importHelpers": true,
       "strict": true,
 
       "composite": false,

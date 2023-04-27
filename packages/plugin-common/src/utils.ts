@@ -23,11 +23,33 @@ export const createUtils = (target: Targets): Utils => {
       },
    }
 
-   const assert = (check: boolean, message: string): asserts check => {
-      if (check) { return }
-      logger.error(message)
-      throw new Error(message)
+   return {
+      logger,
+      assert: (check, message) => {
+         if (check) { return }
+         logger.error(message)
+         throw new Error(message)
+      },
+      downgrade: (
+         targetVer,
+         compatPluginVer,
+         compatLibVer = compatPluginVer
+      ) =>
+         logger.throw(
+            `${
+               getTargetPkgName(target, true)
+            } version "${targetVer}" requires older versions of lazy-init.` +
+               `\n` +
+               `  @lazy-init/nextjs-plugin@${compatPluginVer}` +
+               `\n` +
+               `  lazy-init@${compatLibVer}`
+         ),
    }
+}
 
-   return { assert, logger }
+export const getTargetPkgName = (target: Targets, fullname?: boolean) => {
+   if (target === 'nextjs') { return fullname ? 'Next.js' : 'next' }
+   if (target === 'swc-core') { return '@swc/core' }
+   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+   throw new Error(`Invalid target: ${target}`)
 }

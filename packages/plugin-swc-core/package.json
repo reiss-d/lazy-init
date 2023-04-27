@@ -14,7 +14,7 @@
       "prepack": "shx rm -f dist/swc_plugin_lazy_init.wasm"
    },
    "peerDependencies": {
-      "@swc/core": ">= 1.3.29 <= 1.3.37 || 1.3.38 || >= 1.3.40 <= 1.3.42"
+      "@swc/core": ">= 1.3.49"
    },
    "dependencies": {
       "@lazy-init/plugin-common": "workspace:*",
