@@ -10,26 +10,54 @@
    "exports": {
       "./package.json": "./package.json",
       ".": {
-         "types": "./dist/index.d.ts",
-         "import": "./dist/index.mjs",
-         "module": "./dist/index.esm.js",
-         "default": "./dist/index.js"
+         "import": {
+            "types@<5.0": "./dist/esm/index.d.mts",
+            "types": "./dist/ts5.0/esm/index.d.mts",
+            "default": "./dist/esm/index.mjs"
+         },
+         "module": {
+            "types@<5.0": "./dist/esm/index.esm.d.ts",
+            "types": "./dist/ts5.0/esm/index.esm.d.ts",
+            "default": "./dist/esm/index.esm.js"
+         },
+         "require": {
+            "types@<5.0": "./dist/index.d.ts",
+            "types": "./dist/ts5.0/index.d.ts",
+            "default": "./dist/index.js"
+         }
       },
       "./cache": {
-         "import": "./dist/cache.mjs",
-         "types": "./dist/cache.d.ts",
-         "module": "./dist/cache.esm.js",
-         "default": "./dist/cache.js"
+         "import": {
+            "types@<5.0": "./dist/esm/cache.d.mts",
+            "types": "./dist/ts5.0/esm/cache.d.mts",
+            "default": "./dist/esm/cache.mjs"
+         },
+         "module": {
+            "types@<5.0": "./dist/esm/cache.esm.d.ts",
+            "types": "./dist/ts5.0/esm/cache.esm.d.ts",
+            "default": "./dist/esm/cache.esm.js"
+         },
+         "require": {
+            "types@<5.0": "./dist/cache.d.ts",
+            "types": "./dist/ts5.0/cache.d.ts",
+            "default": "./dist/cache.js"
+         }
       }
    },
    "typesVersions": {
+      "<5.0": {
+         "dist/index.d.ts": ["dist/index.d.ts"],
+         "cache": ["dist/cache.d.ts"],
+         "*": ["dist/*"]
+      },
       "*": {
-         "cache": [
-            "dist/cache.d.ts"
-         ]
+         "dist/index.d.ts": ["dist/ts5.0/index.d.ts"],
+         "cache": ["dist/ts5.0/cache.d.ts"],
+         "*": ["dist/ts5.0/*"]
       }
    },
    "main": "./dist/index.js",
+   "module": "./dist/esm/index.mjs",
    "types": "./dist/index.d.ts",
    "files": [
       "dist",
@@ -38,9 +66,15 @@
    ],
    "sideEffects": false,
    "scripts": {
-      "build": "tsup-node --config ./tsup.config.ts && cp ./dist/index.d.ts ./dist/cache.d.ts && cp ../../README.md .",
+      "build": "pnpm clean && tsup-node --config tsup.config.ts && pnpm downlevel",
+      "clean": "shx rm -rf dist && shx cp -u ../../README.md . && shx mkdir -p dist/ts5.0/esm",
+      "downlevel": "shx cp -R dist/*.d.ts dist/ts5.0 && concurrently \"node downlevel.js\" \"node downlevel.js --ts5\"",
       "test": "jest",
       "typedoc": "typedoc --excludeExternals"
+   },
+   "dependencies": {
+      "ts-essentials": "^9.3.1",
+      "tslib": "^2.5.0"
    },
    "devDependencies": {
       "@lazy-init/swc-core-plugin": "workspace:*",

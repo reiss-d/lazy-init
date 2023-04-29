@@ -1,3 +1,4 @@
+import type { DeepWritable } from 'ts-essentials'
 import { normalizeOptions } from '../utils'
 import { cacheObject } from '../cached'
 import type { Key, Value } from '../types'
@@ -100,6 +101,27 @@ export type LazyOptions = {
  * }
  * ```
  */
+/**#__TS5_START__*/
+
+// array/object (exact)
+export function lazyObj<
+   const T extends object,
+>(
+   value: T,
+   options?: boolean | LazyOptions
+): DeepWritable<T>
+
+/**#__TS5_END__*/
+
+// array (inferred)
+export function lazyObj<
+   T extends any[],
+>(
+   value: T,
+   options?: boolean | LazyOptions
+): T
+
+// object (inferred)
 export function lazyObj<
    T extends Record<Key, V1 | V2>,
    V1 extends Value,
@@ -108,12 +130,20 @@ export function lazyObj<
 >(
    value: T,
    options?: boolean | LazyOptions
-): T {
-   const { cache, freeze } = normalizeOptions(options)
+): T
 
-   freeze && Object.freeze(value)
+export function lazyObj(
+   value: object,
+   options?: boolean | LazyOptions
+) {
+   if (!options) { return value }
 
-   return cache ? cacheObject(value, freeze) : value
+   options = normalizeOptions(options)
+   options.freeze && Object.freeze(value)
+
+   return options.cache
+      ? cacheObject(value, options.freeze)
+      : value
 }
 
 export type LazyObj = typeof lazyObj
@@ -126,11 +156,14 @@ export type LazyObj = typeof lazyObj
  *
  * @hidden
  */
-export const lazyObj_cached: LazyObj = (obj, options) => {
+export const lazyObj_cached: LazyObj = (
+   value: object,
+   options?: boolean | LazyOptions
+) => {
+   if (options === undefined) { return lazyObj(value, true) }
+
    options = normalizeOptions(options)
 
-   if (options.cache === undefined) {
-      options.cache = true
-   }
-   return lazyObj(obj, options)
+   if (options.cache === undefined) { options.cache = true }
+   return lazyObj(value, options)
 }

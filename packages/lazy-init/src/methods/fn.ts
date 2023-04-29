@@ -58,9 +58,11 @@ export function lazyFn<R>(
    fn: () => R,
    options: LazyFnOptions = {}
 ): R {
-   const { cache = false } = options
    const result = fn()
-   return cache ? cacheObject(result) : result
+
+   return options.cache
+      ? cacheObject(result)
+      : result
 }
 
 export type LazyFn = typeof lazyFn

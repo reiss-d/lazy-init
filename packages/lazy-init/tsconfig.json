@@ -8,5 +8,5 @@
       },
       "types": ["jest", "node"]
    },
-   "include": ["src", "tests"]
+   "include": ["src", "tests", "downlevel.js"]
 }

@@ -7,20 +7,28 @@ const common = {
    tsconfig: './tsconfig.build.json',
    target: 'es2020',
    sourcemap: isDevelopment,
-   clean: true,
-   dts: true,
+   outDir: 'dist',
+   clean: false,
+   dts: false,
    minify: !isDevelopment,
 } as const
 
 export default defineConfig([
    {
       ...common,
-      format: ['esm', 'cjs'],
+      format: 'cjs',
+      dts: true,
+   },
+   {
+      ...common,
+      format: 'esm',
+      outDir: 'dist/esm',
    },
    /** Import syntax without .mjs extension */
    {
       ...common,
       format: 'esm',
+      outDir: 'dist/esm',
       outExtension({ format }) {
          return { js: `.${format}.js` }
       },

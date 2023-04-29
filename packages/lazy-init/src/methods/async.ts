@@ -133,11 +133,9 @@ export async function lazyAsync<R>(
 
    let promise = promises.get<R>(key)
 
-   if (!promise) {
+   if (promise == undefined) {
       promise = new Promise((resolve, reject) => {
-         const cleanup = () => {
-            promises.delete(key!)
-         }
+         const cleanup = () => promises.delete(key!)
 
          const onReject = (err: unknown) => {
             if (process.env.NODE_ENV !== 'production') {
