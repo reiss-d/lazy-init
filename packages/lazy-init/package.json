@@ -46,14 +46,26 @@
    },
    "typesVersions": {
       "<5.0": {
-         "dist/index.d.ts": ["dist/index.d.ts"],
-         "cache": ["dist/cache.d.ts"],
-         "*": ["dist/*"]
+         "dist/index.d.ts": [
+            "dist/index.d.ts"
+         ],
+         "cache": [
+            "dist/cache.d.ts"
+         ],
+         "*": [
+            "dist/*"
+         ]
       },
       "*": {
-         "dist/index.d.ts": ["dist/ts5.0/index.d.ts"],
-         "cache": ["dist/ts5.0/cache.d.ts"],
-         "*": ["dist/ts5.0/*"]
+         "dist/index.d.ts": [
+            "dist/ts5.0/index.d.ts"
+         ],
+         "cache": [
+            "dist/ts5.0/cache.d.ts"
+         ],
+         "*": [
+            "dist/ts5.0/*"
+         ]
       }
    },
    "main": "./dist/index.js",
@@ -73,8 +85,7 @@
       "typedoc": "typedoc --excludeExternals"
    },
    "dependencies": {
-      "ts-essentials": "^9.3.1",
-      "tslib": "^2.5.0"
+      "ts-essentials": "^9.3.1"
    },
    "devDependencies": {
       "@lazy-init/swc-core-plugin": "workspace:*",

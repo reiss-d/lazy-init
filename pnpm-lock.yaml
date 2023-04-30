@@ -151,9 +151,6 @@ importers:
       ts-essentials:
         specifier: ^9.3.1
         version: 9.3.1(typescript@5.0.4)
-      tslib:
-        specifier: ^2.5.0
-        version: 2.5.0
     devDependencies:
       '@lazy-init/swc-core-plugin':
         specifier: workspace:*

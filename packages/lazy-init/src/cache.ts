@@ -1,8 +1,7 @@
 /*
  * Different entry point that enables caching by default.
  */
-import { createLazy } from './base'
-import { lazyAsync, lazyFn, lazyObj_cached } from './methods'
+import { createLazy, lazyAsync, lazyFn, lazyObj_cached } from './base'
 
 const lazy = createLazy(lazyObj_cached)
 

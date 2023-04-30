@@ -1,4 +1,4 @@
-import type { LazyOptions } from './methods/obj'
+import type { LazyOptions } from './methods'
 
 export const timeout = async (ms: number) => {
    return new Promise<void>((resolve) => setTimeout(resolve, ms))

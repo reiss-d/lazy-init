@@ -1,5 +1,4 @@
-import { createLazy } from './base'
-import { lazyAsync, lazyFn, lazyObj } from './methods'
+import { createLazy, lazyAsync, lazyFn, lazyObj } from './base'
 
 const lazy = createLazy(lazyObj)
 

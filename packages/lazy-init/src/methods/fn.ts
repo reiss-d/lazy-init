@@ -1,4 +1,3 @@
-export { lazyAsync } from './async'
 import { cacheObject } from '../cached'
 
 /**
