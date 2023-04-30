@@ -17,6 +17,9 @@ Lazily initialize values by deferring their creation until first use, resulting 
     * [LazyOptions](#lz-options)
     * [LazyFnOptions](#lz-fn-options)
     * [LazyAsyncOptions](#lz-async-options)
+* [Old Versions](#old-versions)
+  * [Next.js](#next-js-old-versions)
+  * [SWC](#swc-old-versions)
 <!-- * [FAQ](#faq) -->
 <!-- * [Benchmarks](#benchmarks) -->
 * [License](#license)
@@ -33,13 +36,14 @@ This library **requires** your code is transpilied with [SWC](https://swc.rs).
 <h3 id="next-js-setup">Next.js</h3>
 
 
-|       Version        |  Supported  |
-| :------------------- |:-----------:|
-| `>= 13.2.4`          |     :bug:   |
-| `>= 13.1.4`          |      ✅     |
-| `< 13.1.4`           |      ❌     |
+|       Version        |          Supported           |
+| :------------------- |:----------------------------:|
+| `>= 13.3.2`          |              ✅              |
+| `13.2.4 ~ 13.3.1`    |             :bug:            |
+| `<= 13.2.3`          | [See](#next-js-old-versions) |
 
-> Next.js v13.2.4 and up cannot execute SWC Wasm plugins, [due to a bug](https://github.com/vercel/next.js/issues/46989#issuecomment-1486989081). Support will be added once it is fixed.
+
+> Next.js v13.2.4 ~ v13.3.1 cannot execute SWC Wasm plugins, [due to a bug](https://github.com/vercel/next.js/issues/46989#issuecomment-1486989081).
 
 The `next` package must be installed first and present in your `package.json` **before** installing `lazy-init`.
 
@@ -82,12 +86,11 @@ export default {
 
 <h3 id="swc-setup">SWC - @swc/core</h3>
 
-|       Version         |  Supported  |
-| :-------------------- |:-----------:|
-| `>= 1.3.40 <= 1.3.42` |      ✅     |
-| `1.3.39`              |      ❌     |
-| `>= 1.3.29 <= 1.3.38` |      ✅     |
-| `< 1.3.29`            |      ❌     |
+|       Version        |          Supported           |
+| :------------------- |:----------------------------:|
+| `>= 1.3.49`          |              ✅              |
+| `<= 1.3.48`          |   [See](#swc-old-versions)   |
+
 
 The `@swc/core` package must be installed first and present in your `package.json` **before** installing `lazy-init`.
 
@@ -423,6 +426,28 @@ Options object for the [`lz.async`](#lz-async-method) / [`lazyAsync`](#lz-async-
 The lazy-init plugin will automatically generate a 12 char alphanumeric unique key. However, you may provide your own value if needed.
 <!---------- END: option type decals ---------->
 ___
+
+## Old Versions
+
+To use older versions compatible with your framework, install the plugin using its exact version.
+
+<h3 id="next-js-old-versions">Next.js</h3>
+
+
+|       Version        |             Install              |
+| :------------------- |:--------------------------------:|
+| `13.1.4 ~ 13.2.3`    | `@lazy-init/nextjs-plugin@2.2.0` |
+
+
+<h3 id="swc-old-versions">SWC - @swc/core</h3>
+
+|       Version        |             Install              |
+| :------------------- |:--------------------------------:|
+| `1.3.40 ~ 1.3.42`    | `@lazy-init/nextjs-plugin@2.2.0` |
+| `1.3.29 ~ 1.3.38`    | `@lazy-init/nextjs-plugin@2.2.0` |
+
+___
+
 
 ## License
 
