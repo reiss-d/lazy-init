@@ -18,6 +18,9 @@ const config = {
          },
       }],
    },
+   // since the actual package.json is in dist (publishConfig.directory)
+   // we need to ignore the root package.json so jest doesn't complain
+   modulePathIgnorePatterns: ['<rootDir>/package.json'],
 }
 
 module.exports = config

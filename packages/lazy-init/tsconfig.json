@@ -3,10 +3,11 @@
    "compilerOptions": {
       "paths": {
          // used for testing
+         // NOTE: these are NOT real paths, jest will resolve to `dist` folder
          "lazy-init": ["./src/index.ts"],
          "lazy-init/cache": ["./src/cache.ts"]
       },
       "types": ["jest", "node"]
    },
-   "include": ["src", "tests", "downlevel.js"]
+   "include": ["src", "tests", "build-helpers.js"]
 }

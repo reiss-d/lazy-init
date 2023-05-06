@@ -16,17 +16,30 @@ function config(entry: string[], bundle = false): Options[] {
    const opts = { ...common, entry, bundle }
 
    return [
+      /**
+       * CJS (.js)
+       *
+       * Node supports both .cjs and .js, however browsers do not support .cjs.
+       */
       {
          ...opts,
          format: 'cjs',
          dts: true,
       },
+      /**
+       * ESM (.mjs)
+       */
       {
          ...opts,
          format: 'esm',
          outDir: 'dist/esm',
       },
-      /** Import syntax without .mjs extension */
+      /**
+       * ESM (.esm.js)
+       *
+       * This is useful for environments that support ESM but don't
+       * allow .mjs files yet, for example certain bundlers.
+       */
       {
          ...opts,
          format: 'esm',

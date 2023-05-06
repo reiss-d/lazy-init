@@ -7,6 +7,7 @@
          "inputs": [
             "src/**/*.ts",
             "src/**/*.tsx",
+            "build-helpers.js",
             "tsup.config.ts",
             "tsconfig.json",
             "tsconfig.build.json",
@@ -14,7 +15,7 @@
          ]
       },
       "test": {
-         "dependsOn": ["^build", "lazy-init-plugin#build"],
+         "dependsOn": ["build"],
          "env": ["LAZY_INIT_DEV_NO_CACHE"],
          "outputs": []
       }
