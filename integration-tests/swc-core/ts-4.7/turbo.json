@@ -1,0 +1,17 @@
+{
+   "$schema": "https://turbo.build/schema.json",
+   "extends": ["//"],
+   "pipeline": {
+      "test": {
+         "dependsOn": ["^build"],
+         "inputs": [
+            "src/**/*.ts",
+            ".swcrc",
+            "tsconfig.json",
+            "../../integration-test.js"
+         ],
+         "outputs": ["dist/**"],
+         "outputMode": "errors-only"
+      }
+   }
+}

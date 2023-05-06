@@ -1,4 +1,6 @@
 packages:
    - 'configs/*'
    - 'crates/*'
+   - 'integration-tests/nextjs/*'
+   - 'integration-tests/swc-core/*'
    - 'packages/*'

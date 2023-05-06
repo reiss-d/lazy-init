@@ -1,0 +1,19 @@
+{
+   "$schema": "https://json.schemastore.org/swcrc",
+   "minify": false,
+   "module": {
+      "type": "commonjs"
+   },
+   "jsc": {
+      "target": "es2020",
+      "parser": {
+         "syntax": "typescript",
+         "tsx": false
+      },
+      "experimental": {
+         "plugins": [
+            ["@lazy-init/swc-core-plugin", {}]
+         ]
+      }
+   }
+}

@@ -1,0 +1,19 @@
+{
+   "$schema": "https://turbo.build/schema.json",
+   "extends": ["//"],
+   "pipeline": {
+      "test": {
+         "dependsOn": ["^build"],
+         "inputs": [
+            "app/**/*.ts",
+            "app/**/*.tsx",
+            "next.config.js",
+            "next.config.mjs",
+            "tsconfig.json",
+            "../../integration-test.js"
+         ],
+         "outputs": [".next/**", "!.next/cache/**"],
+         "outputMode": "errors-only"
+      }
+   }
+}

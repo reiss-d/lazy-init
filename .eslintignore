@@ -5,3 +5,4 @@ temp
 **/*.eslintrc.js
 /crates
 typedoc.ts
+integration-tests/integration-test.js
