@@ -103,7 +103,7 @@ export type LazyOptions = {
  * }
  * ```
  */
-/*#__TS5_START__*/
+/**#__TS5_START__*/
 
 // array/object (exact)
 export function lazyObj<
