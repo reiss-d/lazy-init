@@ -1,19 +1,19 @@
 import type { DeepWritable } from 'ts-essentials'
 import { normalizeOptions } from '../utils'
 import { cacheObject } from '../cached'
-import type { Key, Value } from '../types'
+import type { ArrayOrObject, Value } from '../types'
 
 /**
  * Options object for the `lz` function.
  */
 export type LazyOptions = {
    /**
-    * Set `true` to freeze the object.
+    * Set `true` to freeze the value.
     * @default false
     */
    freeze?: boolean
    /**
-    * Set `true` to cache the object.
+    * Set `true` to cache the value.
     * Setting `true` | `false` will override the default behavior.
     *
     * Import from `"lazy-init/cache"` to **enable** caching by default.
@@ -22,14 +22,14 @@ export type LazyOptions = {
 }
 
 /**
- * Lazily initialize an object by only creating it **once**.
- * The first call to `lz` will create the object and hoist
- * it into a lazy variable. After which the same object will
- * be returned without any calls to `lz`.
+ * Lazily initialize any non-primitive value by only creating it **once**.
+ * The first call to `lz` will create the value and hoist it into a lazy
+ * variable. After which the same value will be returned without additional
+ * calls to `lz`.
  *
- * @param value The object to lazily initialize.
- * @param options Optional `true` to freeze the object, or a [LazyOptions](https://github.com/reiss-d/lazy-init#lz-options) object.
- * @returns the initialized object.
+ * @param value The value to lazily initialize.
+ * @param options `true` to freeze the value, or an object with configured options.
+ * @returns The initialized value.
  *
  * @example
  * ```ts
@@ -42,7 +42,7 @@ export type LazyOptions = {
  * a === b // true
  * ```
  * #### Caching
- * *caching results in only a single object being created for the given object structure.*
+ * *Caching results in only a single value ever being created for the given value structure.*
  * @example
  * ```ts
  *   const foo = lz({ a: 1 }, { cache: true })
@@ -50,9 +50,11 @@ export type LazyOptions = {
  *   foo === bar // true
  *   const buzz = lz({ a: 1 }, { cache: false })
  *   foo === buzz // false
+ *   const diff = lz({ a: 2 }, { cache: true })
+ *   foo === diff // false
  * ```
  * #### Default Caching Behavior
- * *import path changes the default caching behavior.*
+ * *Import path changes the default caching behavior.*
  * @example
  * ```ts
  * // not cached by default
@@ -101,7 +103,7 @@ export type LazyOptions = {
  * }
  * ```
  */
-/**#__TS5_START__*/
+/*#__TS5_START__*/
 
 // array/object (exact)
 export function lazyObj<
@@ -113,24 +115,20 @@ export function lazyObj<
 
 /**#__TS5_END__*/
 
-// array (inferred)
+// array/object (inferred)
 export function lazyObj<
-   T extends any[],
+   T extends ArrayOrObject<V | T>,
+   V extends Value,
 >(
    value: T,
    options?: boolean | LazyOptions
-): T
+): DeepWritable<T>
 
-// object (inferred)
-export function lazyObj<
-   T extends Record<Key, V1 | V2>,
-   V1 extends Value,
-   V2 extends Record<Key, V1 | V3>,
-   V3 extends Record<Key, V1>,
->(
+// fallback - map, set, etc.
+export function lazyObj<T>(
    value: T,
    options?: boolean | LazyOptions
-): T
+): DeepWritable<T>
 
 export function lazyObj(
    value: object,

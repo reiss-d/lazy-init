@@ -1,7 +1,4 @@
 /** @hidden */
-export type Key = PropertyKey
-
-/** @hidden */
 export type Value =
    | object
    | boolean
@@ -12,3 +9,11 @@ export type Value =
    | Function
    | null
    | undefined
+
+/** @hidden */
+export declare type Tuple<T = any> = [T?, ...T[]]
+
+export type ArrayOrObject<T extends Value> =
+   | T[]
+   | Tuple<T>
+   | Record<PropertyKey, T>

@@ -144,10 +144,14 @@ import { lz } from "lazy-init" // ESM
 const { lz } = require("lazy-init") // Common JS
 ```
 ```ts
-// call `lz` for objects
-lz({})
+// call `lz` for non-primitive values
+lz({ a: 'foo' })
+lz([1, 2, 3])
+lz(new Map([['key', 'value']]))
+
 // `lz.fn` (lazyFn) for sync functions
 lz.fn(() => {})
+
 // `lz.async` (lazyAsync) for async functions
 lz.async(async () => {})
 ```
@@ -162,21 +166,21 @@ lz.async(async () => {})
 
 ▸ **lz**<`T`>(`value`, `options?`): `T`
 
-Lazily initialize an object by only creating it **once**.
-The first call to `lz` will create the object and hoist
-it into a lazy variable. After which the same object will
-be returned without any calls to `lz`.
+Lazily initialize any non-primitive value by only creating it **once**.
+The first call to `lz` will create the value and hoist
+it into a lazy variable. After which the same value will
+be returned without additional calls to `lz`.
 
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `value` | `T` | The object to lazily initialize. |
-| `options?` | `boolean` \| [`LazyOptions`](#lz-options) | Set `true` to freeze the object, or an object with configured options. |
+| `value` | `T` | The value to lazily initialize. |
+| `options?` | `boolean` \| [`LazyOptions`](#lz-options) | `true` to freeze the value, or an object with configured options. |
 
 #### Returns
 
-`T` - The initialized object.
+`T` - The initialized value.
 
 **`Example`**
 
@@ -190,7 +194,7 @@ const b = foo()
 a === b // true
 ```
 #### Caching
-Caching results in only a single object being created for the given object structure.
+Caching results in only a single value ever being created for the given value structure.
 
 **`Example`**
 
@@ -200,6 +204,8 @@ Caching results in only a single object being created for the given object struc
   foo === bar // true
   const buzz = lz({ a: 1 }, { cache: false })
   foo === buzz // false
+  const diff = lz({ a: 2 }, { cache: true })
+  foo === diff // false
 ```
 #### Default Caching Behavior
 Import path changes the default caching behavior.
@@ -377,8 +383,8 @@ Options object for the [`lz`](#lz-method) method.
 
 | Name | Type | Description | Default |
 | :------ | :------ | :------ | :------ |
-| `cache?` | `boolean` | Set `true` to cache the object. Setting `true` \| `false` will override the default behavior. See [default cache behaviour](#default-caching-behavior).
-| `freeze?` | `boolean` | Set `true` to freeze the object. | `false` |
+| `cache?` | `boolean` | Set `true` to cache the value. Setting `true` \| `false` will override the default behavior. See [default cache behaviour](#default-caching-behavior).
+| `freeze?` | `boolean` | Set `true` to freeze the value. | `false` |
 
 ___
 
@@ -393,7 +399,7 @@ Options object for the [`lz.fn`](#lz-fn-method) / [`lazyFn`](#lz-fn-method) meth
 
 | Name | Type | Description | Default |
 | :------ | :------ | :------ | :------ |
-| `cache?` | `boolean` | Set `true` to cache the object returned by the function. Objects returned by functions are never cached by default. | `false` |
+| `cache?` | `boolean` | Set `true` to cache the value returned by the function. Values returned by functions are never cached by default. | `false` |
 
 ___
 
@@ -414,7 +420,7 @@ Options object for the [`lz.async`](#lz-async-method) / [`lazyAsync`](#lz-async-
 
 | Name | Type | Description | Default |
 | :------ | :------ | :------ | :------ |
-| `cache?` | `boolean` | Set `true` to cache the object returned by the function. Objects returned by functions are never cached by default. | `false` |
+| `cache?` | `boolean` | Set `true` to cache the value returned by the function. Values returned by functions are never cached by default. | `false` |
 | `fallback?` | `R` | Provide a fallback value that will be used if the asynchronous function throws an error. If no fallback value is provided, the error will be thrown. |
 | `key?` | `string` | A unique identifier used to deduplicate multiple calls to the function before the asynchronous value has been initialized. | [`see`](#asynckey) |
 | `onError?` | (`err`: `unknown`) => `void` | Called if the asynchronous function throws an error. |
