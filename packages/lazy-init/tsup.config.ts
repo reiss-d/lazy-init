@@ -12,8 +12,15 @@ const common = {
    minify: !isDevelopment,
 } as const
 
-function config(entry: string[], bundle = false): Options[] {
-   const opts = { ...common, entry, bundle }
+/**
+ * @param entry - The entry point(s) to bundle.
+ * @param isExported - If the entry point(s) are exports in package.json.
+ */
+function config(
+   entry: string[],
+   isExported = false
+): Options[] {
+   const opts = { ...common, entry, bundle: !isExported }
 
    return [
       /**
@@ -24,7 +31,7 @@ function config(entry: string[], bundle = false): Options[] {
       {
          ...opts,
          format: 'cjs',
-         dts: true,
+         dts: isExported,
       },
       /**
        * ESM (.mjs)
@@ -54,9 +61,9 @@ function config(entry: string[], bundle = false): Options[] {
 export default defineConfig([
    ...config([
       'src/base.ts',
-   ], true),
+   ]),
    ...config([
       'src/index.ts',
       'src/cache.ts',
-   ]),
+   ], true),
 ])
