@@ -9,7 +9,10 @@ function postInstall() {
     (0, plugin_common_1.copyPlugin)('swc-core', __dirname, (version) => {
         const check = (range) => (0, semver_1.satisfies)(version, range);
         const unsupported = () => utils.logger.throw(`Unsupported @swc/core version: ${version}`);
-        if (check('>= 1.3.49')) {
+        if (check('>= 1.3.58')) {
+            return 'v076';
+        }
+        if (check('>= 1.3.49 <= 1.3.57')) {
             return 'v075';
         }
         if (check('>= 1.3.40 <= 1.3.42')) {

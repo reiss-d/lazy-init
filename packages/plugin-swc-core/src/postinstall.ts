@@ -12,7 +12,8 @@ function postInstall() {
       const unsupported = () =>
          utils.logger.throw(`Unsupported @swc/core version: ${version}`)
 
-      if (check('>= 1.3.49')) { return 'v075' }
+      if (check('>= 1.3.58')) { return 'v076' }
+      if (check('>= 1.3.49 <= 1.3.57')) { return 'v075' }
       if (check('>= 1.3.40 <= 1.3.42')) {
          return utils.downgrade(version, '2.2.0')
       }

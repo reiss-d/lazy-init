@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-versions=('075')
+versions=('075' '076')
 
 if [[ "$1" == "--one" ]]; then
   versions=("${versions[0]}")
