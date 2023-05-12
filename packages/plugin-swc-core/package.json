@@ -9,7 +9,7 @@
    "author": "Reiss Davidson",
    "main": "dist/swc_plugin_lazy_init.wasm",
    "scripts": {
-      "build": "tsc",
+      "build": "tsup-node --config tsup.config.ts",
       "postinstall": "node dist/postinstall.js",
       "prepack": "shx rm -f dist/swc_plugin_lazy_init.wasm"
    },
@@ -25,6 +25,7 @@
       "@types/node": "^18.16.1",
       "eslint-config-internal-base": "workspace:*",
       "tsconfig": "workspace:*",
+      "tsup": "^6.7.0",
       "typescript": "^5.0.4"
    },
    "files": [

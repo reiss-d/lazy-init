@@ -5,7 +5,7 @@
    "main": "dist/index.js",
    "types": "dist/index.d.ts",
    "scripts": {
-      "build": "tsc"
+      "build": "tsup-node --config tsup.config.ts"
    },
    "dependencies": {
       "shelljs": "^0.8.5"
@@ -15,6 +15,7 @@
       "@types/shelljs": "^0.8.12",
       "eslint-config-internal-base": "workspace:*",
       "tsconfig": "workspace:*",
+      "tsup": "^6.7.0",
       "typescript": "^5.0.4"
    },
    "files": [
