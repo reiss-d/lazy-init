@@ -15,8 +15,8 @@
    "rust-analyzer.check.allTargets": false,
    "rust-analyzer.cargo.features": [
       "use-swc_core_v076",
-      "use-testing",
-      "use-plugin_transform"
+      "use-testing"
+      // "use-plugin_transform"
    ],
    "rust-analyzer.check.overrideCommand": [
       "cargo",
@@ -24,7 +24,8 @@
       "clippy",
       "--workspace",
       "--features",
-      "use-swc_core_v076 use-testing use-plugin_transform",
+      // "use-swc_core_v076 use-testing use-plugin_transform",
+      "use-swc_core_v076 use-testing",
       "--all-targets",
       "--tests",
       "--examples",

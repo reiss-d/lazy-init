@@ -26,9 +26,10 @@ export type Downgrade = (
  *
  * ## v0.76.0 ~
  * `@swc/core@1.3.58 ~`
+ * `next@13.4.3-canary.2 ~`
  *
  * ## v0.75.x
  * `@swc/core@1.3.49-1.3.57`
- * `next@13.3.1-canary.12 ~`
+ * `next@13.3.1-canary.12-13.4.3-canary.1`
  */
 export type CoreVersions = 'v075' | 'v076'

@@ -28,13 +28,14 @@ pub struct TransformVisitor {
 
 impl TransformVisitor {
     pub fn new(mut config: configs::PluginConfig) -> Self {
-        let mut import_sources = HashSet::new();
-
-        if !config.ignore_lazy_library {
-            for source in ["lazy-init", "lazy-init/cache"] {
-                import_sources.insert(source.into());
-            }
-        }
+        let mut import_sources = if config.ignore_lazy_library {
+            HashSet::new()
+        } else {
+            HashSet::from([
+                "lazy-init".into(),
+                "lazy-init/cache".into(),
+            ])
+        };
 
         for source in config.import_sources.drain(..) {
             import_sources.insert(source.into());
