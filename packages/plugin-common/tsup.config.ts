@@ -6,7 +6,7 @@ export default defineConfig({
    target: 'es2020',
    outDir: 'dist',
    clean: true,
-   dts: false,
+   dts: true,
    minify: true,
    sourcemap: false,
 })
