@@ -1,4 +1,6 @@
-export { lazyAsync, type LazyAsyncFn } from './async'
-export { type LazyFn, lazyFn } from './fn'
+export { lazyAsync } from './async'
+export type { LazyAsyncFn, LazyAsyncOptions } from './async'
+export { lazyFn } from './fn'
+export type { LazyFn, LazyFnOptions } from './fn'
 export { lazyObj, lazyObj_cached } from './obj'
 export type { LazyObj, LazyOptions } from './obj'

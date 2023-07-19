@@ -1,19 +1,12 @@
 /** @hidden */
-export type Value =
-   | object
-   | boolean
-   | string
-   | number
-   | symbol
+type InferLiterals =
    | bigint
-   | Function
-   | null
-   | undefined
+   | boolean
+   | number
+   | string
 
 /** @hidden */
-export declare type Tuple<T = any> = [T?, ...T[]]
-
-export type ArrayOrObject<T extends Value> =
-   | T[]
-   | Tuple<T>
-   | Record<PropertyKey, T>
+export type Infer<T> =
+   | (T extends InferLiterals ? T : never)
+   | (T extends [] ? [] : never)
+   | ({ [K in keyof T]: T[K] extends Function ? T[K] : Infer<T[K]> })

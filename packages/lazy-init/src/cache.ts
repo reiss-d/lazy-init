@@ -7,3 +7,5 @@ const lazy = createLazy(lazyObj_cached)
 
 export { lazy as lz, lazyAsync, lazyFn }
 export default lazy
+
+export type { Lazy } from './base'

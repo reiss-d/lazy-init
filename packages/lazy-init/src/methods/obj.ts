@@ -1,7 +1,6 @@
-import type { DeepWritable } from 'ts-essentials'
 import { normalizeOptions } from '../utils'
 import { cacheObject } from '../cached'
-import type { ArrayOrObject, Value } from '../types'
+import type { Infer } from '../types'
 
 /**
  * Options object for the `lz` function.
@@ -103,32 +102,18 @@ export type LazyOptions = {
  * }
  * ```
  */
-/**#__TS5_START__*/
-
-// array/object (exact)
-export function lazyObj<
-   const T extends object,
->(
-   value: T,
-   options?: boolean | LazyOptions
-): DeepWritable<T>
-
-/**#__TS5_END__*/
 
 // array/object (inferred)
-export function lazyObj<
-   T extends ArrayOrObject<V | T>,
-   V extends Value,
->(
-   value: T,
+export function lazyObj<T extends object>(
+   value: Infer<T>,
    options?: boolean | LazyOptions
-): DeepWritable<T>
+): T
 
-// fallback - map, set, etc.
+// fallback
 export function lazyObj<T>(
    value: T,
    options?: boolean | LazyOptions
-): DeepWritable<T>
+): T
 
 export function lazyObj(
    value: object,

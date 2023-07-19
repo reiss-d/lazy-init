@@ -20,3 +20,4 @@ export function createLazy(base: LazyObj): Lazy {
  * to stop tsup from bundling the same code multiple times.
  */
 export { lazyAsync, lazyFn, lazyObj, lazyObj_cached } from './methods'
+export type { LazyAsyncFn, LazyFn, LazyObj } from './methods'
