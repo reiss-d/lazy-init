@@ -19,7 +19,7 @@
       "build": "pnpm e:dev turbo run build",
       "build:pkgs": "pnpm e:dev turbo run build --filter=./packages/*",
       "build:crates": "pnpm e:dev turbo run build --filter=./crates/*",
-      "test": "pnpm e:dev pnpm install && turbo run test",
+      "test": "pnpm e:dev pnpm install && turbo run test --continue",
       "test:pkgs": "pnpm e:dev turbo run test --filter=./packages/*",
       "test:crates": "pnpm e:dev turbo run test --filter=./crates/*",
       "typedoc": "pnpm e:dev turbo run typedoc",

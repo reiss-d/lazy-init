@@ -2,29 +2,33 @@
 const path = require('path')
 const shelljs = require('shelljs')
 
-const resolutions = ['node', 'node16', 'nodenext', 'node']
+const resolutions = ['node', 'node16', 'nodenext']
 const isSwcCore = () => process.argv.includes('--swc-core')
 
 main()
 
 function main() {
-   const lastIdx = resolutions.length - 1
-
-   resolutions.forEach((resolution, idx) => {
+   resolutions.forEach((resolution) => {
       updateResolution(resolution)
       isSwcCore() && updateOutDir(resolution)
-
-      // last iteration is to reset back to default
-      if (idx === lastIdx) { return }
 
       console.log('Building with:', { moduleResolution: resolution })
 
       const buildResult = build(resolution)
 
       if (buildResult.code !== 0) {
+         reset()
          throwError('Failed to build.', buildResult, resolution)
       }
    })
+   reset()
+}
+
+function reset() {
+   const resolution = resolutions[0]
+
+   updateResolution(resolution)
+   isSwcCore() && updateOutDir(resolution)
 }
 
 /**
