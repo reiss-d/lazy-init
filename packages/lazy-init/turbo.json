@@ -16,7 +16,7 @@
       },
       "test": {
          "dependsOn": ["build"],
-         "env": ["LAZY_INIT_DEV_NO_CACHE"],
+         "env": ["LAZY_INIT_DEV_NO_CACHE", "LAZY_INIT_FREEZE_MODE"],
          "outputs": []
       }
    }

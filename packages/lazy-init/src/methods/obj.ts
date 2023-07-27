@@ -1,5 +1,5 @@
 import { normalizeOptions } from '../utils'
-import { cacheObject } from '../cached'
+import { cacheObject, freeze } from '../cached'
 import type { Infer } from '../types'
 
 /**
@@ -29,7 +29,7 @@ export const applyLazyOptions = (
    value: object,
    options: LazyOptions
 ): object => {
-   options.freeze && Object.freeze(value)
+   options.freeze && freeze(value)
 
    return options.cache
       ? cacheObject(value, options.freeze)
@@ -137,11 +137,13 @@ export function lazyObj(
 ) {
    if (!optionsOrFreeze) { return value }
 
-   const options = normalizeOptions(optionsOrFreeze)
+   const options = normalizeOptions(optionsOrFreeze, false)
    return applyLazyOptions(value, options)
 }
 
 export type LazyObj = typeof lazyObj
+
+const defaultCacheOptions: LazyOptions = { cache: true, freeze: true }
 
 /**
  * `lazyObj` with caching enabled by default to be exported
@@ -155,8 +157,9 @@ export const lazyObjCached: LazyObj = (
    value: object,
    optionsOrFreeze?: LazyOptions | boolean
 ) => {
-   const options = normalizeOptions(optionsOrFreeze)
-   if (options.cache === undefined) { options.cache = true }
-
+   if (optionsOrFreeze === undefined) {
+      return applyLazyOptions(value, defaultCacheOptions)
+   }
+   const options = normalizeOptions(optionsOrFreeze, true)
    return applyLazyOptions(value, options)
 }
