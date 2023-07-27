@@ -1,6 +1,6 @@
 import { normalizeOptions } from '../utils'
 import { cacheObject, freeze } from '../cached'
-import type { Infer } from '../types'
+import type { Infer, NoInfer } from '../types'
 
 /**
  * Options object for the `lz` function.
@@ -123,7 +123,7 @@ export const applyLazyOptions = (
 export function lazyObj<T extends object>(
    value: Infer<T>,
    optionsOrFreeze?: LazyOptions | boolean
-): T
+): NoInfer<T>
 
 // fallback
 export function lazyObj<T extends object>(
