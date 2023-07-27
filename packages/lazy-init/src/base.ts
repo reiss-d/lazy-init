@@ -19,5 +19,5 @@ export function createLazy(base: LazyObj): Lazy {
  * Re-exporting so that all entry points import from `base.ts`
  * to stop tsup from bundling the same code multiple times.
  */
-export { lazyAsync, lazyFn, lazyObj, lazyObj_cached } from './methods'
+export { lazyAsync, lazyFn, lazyObj, lazyObjCached } from './methods'
 export type { LazyAsyncFn, LazyFn, LazyObj } from './methods'

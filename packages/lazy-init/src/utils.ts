@@ -22,10 +22,9 @@ export const retry = async <R>(
 }
 
 export const normalizeOptions = (
-   options?: LazyOptions | boolean | null
+   optionsOrFreeze?: LazyOptions | boolean
 ): LazyOptions => {
-   if (typeof options !== 'object') {
-      return { cache: options }
-   }
-   return options || {}
+   if (optionsOrFreeze === undefined) { return {} }
+   if (typeof optionsOrFreeze === 'object') { return { ...optionsOrFreeze } }
+   return { freeze: optionsOrFreeze }
 }

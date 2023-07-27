@@ -21,13 +21,29 @@ export type LazyOptions = {
 }
 
 /**
+ * Applies the `LazyOptions` to the given `value`.
+ * @hidden
+ * @internal
+ */
+export const applyLazyOptions = (
+   value: object,
+   options: LazyOptions
+): object => {
+   options.freeze && Object.freeze(value)
+
+   return options.cache
+      ? cacheObject(value, options.freeze)
+      : value
+}
+
+/**
  * Lazily initialize any non-primitive value by only creating it **once**.
  * The first call to `lz` will create the value and hoist it into a lazy
  * variable. After which the same value will be returned without additional
  * calls to `lz`.
  *
  * @param value The value to lazily initialize.
- * @param options `true` to freeze the value, or an object with configured options.
+ * @param optionsOrFreeze `true` to freeze the value, or an object with configured options.
  * @returns The initialized value.
  *
  * @example
@@ -106,27 +122,23 @@ export type LazyOptions = {
 // array/object (inferred)
 export function lazyObj<T extends object>(
    value: Infer<T>,
-   options?: boolean | LazyOptions
+   optionsOrFreeze?: LazyOptions | boolean
 ): T
 
 // fallback
-export function lazyObj<T>(
+export function lazyObj<T extends object>(
    value: T,
-   options?: boolean | LazyOptions
+   optionsOrFreeze?: LazyOptions | boolean
 ): T
 
 export function lazyObj(
    value: object,
-   options?: boolean | LazyOptions
+   optionsOrFreeze?: LazyOptions | boolean
 ) {
-   if (!options) { return value }
+   if (!optionsOrFreeze) { return value }
 
-   options = normalizeOptions(options)
-   options.freeze && Object.freeze(value)
-
-   return options.cache
-      ? cacheObject(value, options.freeze)
-      : value
+   const options = normalizeOptions(optionsOrFreeze)
+   return applyLazyOptions(value, options)
 }
 
 export type LazyObj = typeof lazyObj
@@ -139,14 +151,12 @@ export type LazyObj = typeof lazyObj
  *
  * @hidden
  */
-export const lazyObj_cached: LazyObj = (
+export const lazyObjCached: LazyObj = (
    value: object,
-   options?: boolean | LazyOptions
+   optionsOrFreeze?: LazyOptions | boolean
 ) => {
-   if (options === undefined) { return lazyObj(value, true) }
-
-   options = normalizeOptions(options)
-
+   const options = normalizeOptions(optionsOrFreeze)
    if (options.cache === undefined) { options.cache = true }
-   return lazyObj(value, options)
+
+   return applyLazyOptions(value, options)
 }
