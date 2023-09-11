@@ -29,7 +29,7 @@
  */
 
 /* eslint-disable */
-const isUndefined = (v: any): v is undefined => v === undefined
+import { isUndefined } from 'uft'
 
 // use WeakMap to store the object->key mapping
 // so the objects can be garbage collected.

@@ -53,5 +53,3 @@ export const assert = {
    once: assertOnce,
    nCalls: assertNCalls,
 }
-
-export { timeout } from '../src/utils'

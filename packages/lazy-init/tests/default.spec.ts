@@ -1,13 +1,6 @@
 import { lz } from 'lazy-init'
-import {
-   type AnyObject,
-   assert,
-   repeat,
-   setup,
-   timeout,
-   toBe,
-   toNotBe,
-} from './utils'
+import { timeout } from 'uft'
+import { type AnyObject, assert, repeat, setup, toBe, toNotBe } from './utils'
 
 describe('[lazy-init]: testing "lz()" method', () => {
    test('objects returned by the same "lz()" call are referentially equal', () => {

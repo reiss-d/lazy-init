@@ -1,5 +1,5 @@
 /* eslint-disable lazy-init/require-await */
-import { retry } from '../utils'
+import { assert, isDefined, isString, retry } from 'uft'
 import { cacheObject } from '../cached'
 
 interface PromiseMap extends Map<string, Promise<any>> {
@@ -121,43 +121,41 @@ export async function lazyAsync<R>(
     * would need to always pass an object literal. This is inconvenient
     * since the user may want to pass a variable that contains their
     * default options.
-    * @hidden
+    * @internal
     */
    // eslint-disable-next-line prefer-rest-params
    key ||= arguments[2]
 
-   if (!key) {
-      // this should never happen
-      throw new Error('[lazy-init]: async function is missing key.')
-   }
+   // this should never throw
+   assert(
+      !!key && isString(key),
+      '[lazy-init]: `lz.async` is missing key. ' +
+         `This is a bug, please report it.`
+   )
 
    let promise = promises.get<R>(key)
 
-   if (promise == undefined) {
+   if (!isDefined(promise)) {
       promise = new Promise((resolve, reject) => {
          const cleanup = () => promises.delete(key!)
 
          const onReject = (err: unknown) => {
             if (process.env.NODE_ENV !== 'production') {
                console.error(
-                  '[lazy-init]: lz.async promise rejected',
+                  '[lazy-init]: `lz.async` promise rejected.',
                   { key, err }
                )
             }
             onError?.(err)
 
-            if (fallback !== undefined) { onResolve(fallback) }
+            if (isDefined(fallback)) { onResolve(fallback) }
             else { reject(err) }
 
             cleanup()
          }
 
          const onResolve = (res: R) => {
-            resolve(
-               cache
-                  ? cacheObject(res)
-                  : res
-            )
+            resolve(cache ? cacheObject(res) : res)
             onInitialized?.(res)
          }
 

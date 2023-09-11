@@ -76,6 +76,9 @@
       "test": "jest",
       "typedoc": "typedoc --excludeExternals"
    },
+   "dependencies": {
+      "uft": "^0.1.3"
+   },
    "devDependencies": {
       "@lazy-init/swc-core-plugin": "workspace:*",
       "@swc/cli": "^0.1.62",

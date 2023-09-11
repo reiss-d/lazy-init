@@ -1,3 +1,4 @@
+import { isObjectLoose, isUndefined } from 'uft'
 import { stableHash } from './stableHash'
 
 type HashToObjectMap = Map<string, any>
@@ -25,11 +26,7 @@ const noCacheInDevelopment = isDevelopment &&
 
 export const cacheObject = <T>(value: T, isFrozen?: boolean): T => {
    // do not cache non-object/null values
-   if (
-      noCacheInDevelopment ||
-      typeof value !== 'object' ||
-      value === null
-   ) {
+   if (noCacheInDevelopment || !isObjectLoose(value)) {
       return value
    }
 
@@ -38,7 +35,7 @@ export const cacheObject = <T>(value: T, isFrozen?: boolean): T => {
       const store = isFrozen ? cacheStoreFrozen : cacheStore
       let obj = store.get(hash) as T | undefined
 
-      if (obj === undefined) {
+      if (isUndefined(obj)) {
          obj = value
          store.set(hash, obj)
       }

@@ -10,6 +10,11 @@ const common = {
    clean: false,
    dts: false,
    minify: !isDevelopment,
+   /**
+    * Dependencies that should be bundled inline.
+    * This should rarely be used.
+    */
+   noExternal: ['uft'] as string[],
 } as const
 
 /**
