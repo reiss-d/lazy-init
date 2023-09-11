@@ -3,7 +3,7 @@
  */
 import { createLazy, lazyAsync, lazyFn, lazyObjCached } from './base'
 
-const lazy = createLazy(lazyObjCached)
+const lazy = /*#__PURE__*/ createLazy(lazyObjCached)
 
 export { lazy as lz, lazyAsync, lazyFn }
 export default lazy
