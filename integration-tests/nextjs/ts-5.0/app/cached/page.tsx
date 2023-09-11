@@ -1,10 +1,10 @@
-import { lz } from 'lazy-init/cache'
+import { lzc } from 'lazy-init'
 import { Component } from './ClientComponent'
 
 export default function Page() {
-   const a = lz({ a: 'foo' })
-   const b = lz([1, 2, { b: 3 }])
-   const c = lz.fn(() => ({ c: 'bar' }))
+   const a = lzc({ a: 'foo' })
+   const b = lzc([1, 2, { b: 3 }])
+   const c = lzc.fn(() => ({ c: 'bar' }))
 
    return (
       <div>

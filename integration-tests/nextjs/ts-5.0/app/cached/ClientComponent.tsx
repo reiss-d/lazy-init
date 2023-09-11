@@ -1,8 +1,8 @@
 'use client'
-import { lz } from 'lazy-init/cache'
+import { lzc } from 'lazy-init'
 
 export function Component() {
-   const result = lz.fn(() => 'lazy fn cached')
+   const result = lzc.fn(() => 'lazy fn cached')
    return (
       <div>
          {result}
