@@ -21,11 +21,10 @@ export const retry = async <R>(
    }
 }
 
-// if cache by default, then freeze by default unless explicitly set
 /**
  * If `cache || cacheByDefault` is `true`, then `freeze` is `true` unless
  * explicitly set to `false`.
- * @hidden
+ * @internal
  */
 export const normalizeOptions = (
    optionsOrFreeze: LazyOptions | boolean,

@@ -22,7 +22,6 @@ export type LazyOptions = {
 
 /**
  * Applies the `LazyOptions` to the given `value`.
- * @hidden
  * @internal
  */
 export const applyLazyOptions = (
@@ -60,13 +59,15 @@ export const applyLazyOptions = (
  * *Caching results in only a single value ever being created for the given value structure.*
  * @example
  * ```ts
- *   const foo = lz({ a: 1 }, { cache: true })
- *   const bar = lz({ a: 1 }, { cache: true })
- *   foo === bar // true
- *   const buzz = lz({ a: 1 }, { cache: false })
- *   foo === buzz // false
- *   const diff = lz({ a: 2 }, { cache: true })
- *   foo === diff // false
+ * const foo = lz({ a: 1 }, { cache: true })
+ * const bar = lz({ a: 1 }, { cache: true })
+ * foo === bar // true
+ *
+ * const buzz = lz({ a: 1 }, { cache: false })
+ * foo === buzz // false
+ *
+ * const diff = lz({ a: 2 }, { cache: true })
+ * foo === diff // false
  * ```
  * #### Default Caching Behavior
  * *Import path changes the default caching behavior.*
@@ -151,7 +152,7 @@ const defaultCacheOptions: LazyOptions = { cache: true, freeze: true }
  *
  * See {@link lazyObj} above.
  *
- * @hidden
+ * @internal
  */
 export const lazyObjCached: LazyObj = (
    value: object,

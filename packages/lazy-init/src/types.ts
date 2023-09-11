@@ -1,15 +1,15 @@
-/** @hidden */
+/** @internal */
 type InferLiterals =
    | bigint
    | boolean
    | number
    | string
 
-/** @hidden */
+/** @internal */
 export type Infer<T> =
    | (T extends InferLiterals ? T : never)
    | (T extends [] ? [] : never)
    | ({ [K in keyof T]: T[K] extends Function ? T[K] : Infer<T[K]> })
 
-/** @hidden */
+/** @internal */
 export type NoInfer<T> = [T][T extends any ? 0 : never]

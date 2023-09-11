@@ -5,7 +5,7 @@ const cacheStore: HashToObjectMap = new Map()
 /**
  * Frozen objects return the same hash as non-frozen
  * objects so we need to store them separately.
- * @hidden
+ * @internal
  */
 const cacheStoreFrozen: HashToObjectMap = new Map()
 
@@ -18,7 +18,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
  * Therefore it will be hashed every time it is created.
  * Whereas in production, the object will only be hashed
  * once (upon creation).
- * @hidden
+ * @internal
  */
 const noCacheInDevelopment = isDevelopment &&
    process.env.LAZY_INIT_DEV_NO_CACHE === 'true'

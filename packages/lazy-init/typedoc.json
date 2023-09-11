@@ -8,5 +8,6 @@
    ],
    "out": "docs",
    "entryPointStrategy": "resolve",
+   "excludeInternal": true,
    "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-missing-exports"]
 }

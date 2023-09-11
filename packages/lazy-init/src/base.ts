@@ -6,7 +6,7 @@ export type Lazy = LazyObj & { fn: LazyFn; async: LazyAsyncFn }
 /**
  * Creates the `lz` function with property methods `fn` & `async`
  * using the underlying `LazyObj` function.
- * @hidden
+ * @internal
  */
 export function createLazy(base: LazyObj): Lazy {
    const lazy = base as Lazy
