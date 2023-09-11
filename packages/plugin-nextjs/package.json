@@ -18,15 +18,15 @@
    },
    "dependencies": {
       "@lazy-init/plugin-common": "workspace:*",
-      "semver": "^7.5.0"
+      "semver": "^7.5.4"
    },
    "devDependencies": {
-      "@types/node": "^18.16.1",
+      "@types/node": "^18.17.15",
       "eslint-config-internal-base": "workspace:*",
       "next": "^13.4.3",
       "tsconfig": "workspace:*",
-      "tsup": "^6.7.0",
-      "typescript": "^5.0.4"
+      "tsup": "^7.2.0",
+      "typescript": "^5.2.2"
    },
    "files": [
       "dist",
