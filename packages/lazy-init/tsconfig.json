@@ -4,8 +4,7 @@
       "paths": {
          // used for testing
          // NOTE: these are NOT real paths, jest will resolve to `dist` folder
-         "lazy-init": ["./src/index.ts"],
-         "lazy-init/cache": ["./src/cache.ts"]
+         "lazy-init": ["./src/index.ts"]
       },
       "types": ["jest", "node"]
    },

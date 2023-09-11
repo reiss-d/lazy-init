@@ -1,5 +1,4 @@
-import { lz } from 'lazy-init'
-import { lz as lzc } from 'lazy-init/cache'
+import { lz, lzc } from 'lazy-init'
 import type { LazyOptions } from '../src/methods'
 
 const satisfiesOptions = (a: object, b: object, options: LazyOptions) => {
@@ -15,7 +14,7 @@ const satisfiesOptions = (a: object, b: object, options: LazyOptions) => {
    }
 }
 
-describe('[lazy-init]: correct "lazyOptions" are applied by "lz" method', () => {
+describe('correct "lazyOptions" are applied by "lz()" method', () => {
    test('`{ cache: false, freeze: false }` [default]', () => {
       const expectedOptions = { cache: false, freeze: false }
 
@@ -104,7 +103,7 @@ describe('[lazy-init]: correct "lazyOptions" are applied by "lz" method', () => 
    })
 })
 
-describe('[lazy-init/cache]: correct "lazyOptions" are applied by "lz" method', () => {
+describe('correct "lazyOptions" are applied by "lzc()" method', () => {
    test('`{ cache: false, freeze: false }`', () => {
       const expectedOptions = { cache: false, freeze: false }
 

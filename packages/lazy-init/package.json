@@ -29,23 +29,6 @@
             "types": "./ts5.0/index.d.ts",
             "default": "./index.js"
          }
-      },
-      "./cache": {
-         "import": {
-            "types@<5.0": "./esm/cache.d.mts",
-            "types": "./ts5.0/esm/cache.d.mts",
-            "default": "./esm/cache.mjs"
-         },
-         "module": {
-            "types@<5.0": "./esm/cache.esm.d.ts",
-            "types": "./ts5.0/esm/cache.esm.d.ts",
-            "default": "./esm/cache.esm.js"
-         },
-         "require": {
-            "types@<5.0": "./cache.d.ts",
-            "types": "./ts5.0/cache.d.ts",
-            "default": "./cache.js"
-         }
       }
    },
    "typesVersions": {
