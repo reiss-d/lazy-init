@@ -9,8 +9,8 @@ const common = {
    sourcemap: isDevelopment,
    outDir: 'dist',
    clean: false,
-   dts: false,
    bundle: true,
+   dts: true,
    minify: !isDevelopment,
    /**
     * Dependencies that should be bundled inline.
@@ -21,35 +21,19 @@ const common = {
 
 export default defineConfig([
    /**
-    * CJS (.js)
-    *
-    * Node supports both .cjs and .js, however browsers do not support .cjs.
+    * CJS (.js) (.d.ts)
     */
    {
       ...common,
       format: 'cjs',
-      dts: true,
+      outDir: 'dist/cjs',
    },
    /**
-    * ESM (.mjs)
+    * ESM (.mjs) (.d.mts)
     */
    {
       ...common,
       format: 'esm',
       outDir: 'dist/esm',
-   },
-   /**
-    * ESM (.esm.js)
-    *
-    * This is useful for environments that support ESM but don't
-    * allow .mjs files yet, for example certain bundlers.
-    */
-   {
-      ...common,
-      format: 'esm',
-      outDir: 'dist/esm',
-      outExtension({ format }) {
-         return { js: `.${format}.js` }
-      },
    },
 ])

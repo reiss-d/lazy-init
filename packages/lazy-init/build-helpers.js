@@ -1,3 +1,7 @@
+// No longer needed since we're not using TS 5 "const" syntax and the "/cache"
+// export has been removed.
+// Leaving it here for now in case we need it again.
+
 // @ts-check
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs/promises')

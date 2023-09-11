@@ -8,5 +8,5 @@
       },
       "types": ["jest", "node"]
    },
-   "include": ["src", "tests", "build-helpers.js"]
+   "include": ["src", "tests"]
 }

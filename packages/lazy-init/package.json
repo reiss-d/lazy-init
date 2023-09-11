@@ -15,47 +15,32 @@
       "./package.json": "./package.json",
       ".": {
          "import": {
-            "types@<5.0": "./esm/index.d.mts",
-            "types": "./ts5.0/esm/index.d.mts",
+            "types": "./esm/index.d.mts",
             "default": "./esm/index.mjs"
          },
-         "module": {
-            "types@<5.0": "./esm/index.esm.d.ts",
-            "types": "./ts5.0/esm/index.esm.d.ts",
-            "default": "./esm/index.esm.js"
-         },
          "require": {
-            "types@<5.0": "./index.d.ts",
-            "types": "./ts5.0/index.d.ts",
-            "default": "./index.js"
+            "types": "./cjs/index.d.ts",
+            "default": "./cjs/index.js"
          }
       }
    },
    "typesVersions": {
-      "<5.0": {
-         "*": [
-            "*"
-         ]
-      },
       "*": {
-         "*": [
-            "ts5.0/*"
-         ]
+         "*": ["*"]
       }
    },
-   "main": "./index.js",
+   "main": "./cjs/index.js",
    "module": "./esm/index.mjs",
-   "types": "./index.d.ts",
+   "types": "./cjs/index.d.ts",
    "files": [
       "**"
    ],
    "sideEffects": false,
    "scripts": {
-      "build": "pnpm clean && tsup-node --config tsup.config.ts && pnpm fix-types && pnpm downlevel",
-      "clean": "shx rm -rf dist && shx mkdir -p dist/ts5.0/esm && pnpm copy",
-      "copy": " shx cp ../../README.md package.json LICENSE dist && json -I -f dist/package.json -e \"this.publishConfig=undefined; this.devDependencies=undefined; this.scripts=undefined;\"",
-      "fix-types": "shx cp -R dist/*.d.ts dist/ts5.0 && node build-helpers.js --fix-ext",
-      "downlevel": "concurrently \"node build-helpers.js --downlevel\" \"node build-helpers.js --downlevel --ts5\"",
+      "build": "pnpm clean && tsup-node --config tsup.config.ts && pnpm fix-types",
+      "clean": "shx rm -rf dist && shx mkdir -p dist && pnpm copy",
+      "copy": "shx cp ../../README.md package.json LICENSE dist && json -I -f dist/package.json -e \"this.publishConfig=undefined; this.devDependencies=undefined; this.scripts=undefined;\"",
+      "fix-types": "shx mv dist/esm/index.d.ts dist/esm/index.d.mts",
       "test": "jest",
       "typedoc": "typedoc --excludeExternals"
    },
