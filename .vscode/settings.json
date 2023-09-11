@@ -3,6 +3,11 @@
    "editor.formatOnSave": true,
    "editor.defaultFormatter": "dprint.dprint",
    "[json]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "dprint.dprint"
+   },
+   "[markdown]": {
+      "editor.formatOnSave": true,
       "editor.defaultFormatter": "dprint.dprint"
    },
    "files.exclude": {
