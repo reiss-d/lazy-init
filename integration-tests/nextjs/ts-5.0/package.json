@@ -5,7 +5,8 @@
    "private": true,
    "scripts": {
       "start": "next start",
-      "test": "node ../../integration-test.js"
+      "test": "pnpm clean && node ../../integration-test.js",
+      "clean": "shx rm -rf .next"
    },
    "dependencies": {
       "lazy-init": "workspace:*",

@@ -4,7 +4,8 @@
    "license": "MIT",
    "private": true,
    "scripts": {
-      "test": "node ../../integration-test.js --swc-core"
+      "test": "pnpm clean && node ../../integration-test.js --swc-core",
+      "clean": "shx rm -rf .swc"
    },
    "dependencies": {
       "lazy-init": "workspace:*"
