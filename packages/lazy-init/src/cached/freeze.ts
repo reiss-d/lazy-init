@@ -1,13 +1,6 @@
-/**
- * In development mode, we may not want to cache anything.
- * Caching is very slow and in development if the user is
- * **not** transpiling with swc and our plugin (not recommended),
- * the object is not actually lazily initialized.
- * Therefore it will be hashed every time it is created.
- * Whereas in production, the object will only be hashed
- * once (upon creation).
- * @hidden
- */
+import { assert, isObjectLoose } from 'uft'
+
+// TODO: document freeze modes
 type FreezeMode = 'deep' | 'shallow' | 'none'
 
 const FREEZE_MODE = (process.env.LAZY_INIT_FREEZE_MODE || 'deep') as FreezeMode
@@ -18,30 +11,27 @@ const ownKeys = (typeof Reflect !== 'undefined' && Reflect.ownKeys) ||
       ...Object.getOwnPropertySymbols(target),
    ])
 
+/**
+ * Recursively calls `Object.freeze` on objects/arrays.
+ * @internal
+ */
 const deepFreeze = (obj: object): object => {
-   const propNames = ownKeys(obj)
-
-   for (let i = 0; i < propNames.length; i++) {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const value = obj[i]
-      if (
-         value && (
-            typeof value === 'object' ||
-            typeof value === 'function'
-         )
-      ) {
+   if (Array.isArray(obj)) {
+      for (let i = 0; i < obj.length; i++) {
          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-         deepFreeze(value)
+         deepFreeze(obj[i])
+      }
+   } else if (
+      isObjectLoose(obj) &&
+      !(obj instanceof Set) &&
+      !(obj instanceof Map)
+   ) {
+      for (const key of ownKeys(obj)) {
+         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+         deepFreeze(obj[key])
       }
    }
    return Object.freeze(obj)
-}
-
-const invalidFreezeMode = (): never => {
-   throw new Error(
-      `Invalid value for LAZY_INIT_FREEZE_MODE: ${FREEZE_MODE as string}.\n ` +
-         `Possible values are: 'deep', 'shallow', 'none'.`
-   )
 }
 
 // NOTE: all of these checks will be optimized away once env is inlined
@@ -51,4 +41,7 @@ export const freeze = FREEZE_MODE === 'deep'
    ? Object.freeze
    : FREEZE_MODE === 'none'
    ? (obj: object): object => obj // noop
-   : invalidFreezeMode()
+   : assert(
+      false,
+      `[lazy-init]: Invalid value for "LAZY_INIT_FREEZE_MODE": ${FREEZE_MODE as string}. Possible values are: 'deep', 'shallow', 'none'.`
+   ) as never
