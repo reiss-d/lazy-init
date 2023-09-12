@@ -39,10 +39,9 @@
    ],
    "sideEffects": false,
    "scripts": {
-      "build": "pnpm clean && tsup-node --config tsup.config.ts && pnpm fix-types",
+      "build": "pnpm clean && tsup-node --config tsup.config.ts",
       "clean": "shx rm -rf dist && shx mkdir -p dist && pnpm copy",
       "copy": "shx cp ../../README.md package.json LICENSE dist && json -I -f dist/package.json -e \"this.publishConfig=undefined; this.devDependencies=undefined; this.scripts=undefined;\"",
-      "fix-types": "shx mv dist/esm/index.d.ts dist/esm/index.d.mts",
       "test": "jest",
       "typedoc": "typedoc --excludeExternals"
    },
