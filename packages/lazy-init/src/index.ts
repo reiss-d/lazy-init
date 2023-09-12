@@ -19,5 +19,4 @@ const lazy = /*#__PURE__*/ createLazy(lazyObj)
 const lazyCached = /*#__PURE__*/ createLazy(lazyObjCached)
 
 export { lazy as lz, lazyCached as lzc }
-export { lazyAsync, lazyFn }
 export default lazy
