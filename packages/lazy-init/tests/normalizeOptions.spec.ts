@@ -1,5 +1,4 @@
-import { normalizeOptions } from '../src/utils'
-import type { LazyOptions } from '../src/methods'
+import { type LazyOptions, normalizeOptions } from '../src/options'
 
 type Options = Parameters<typeof normalizeOptions>[0]
 

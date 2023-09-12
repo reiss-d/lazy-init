@@ -1,6 +1,10 @@
 import { assert, isObjectLoose } from 'uft'
 
-// TODO: document freeze modes
+/**
+ * Freeze mode values.
+ * @default "deep"
+ * @internal
+ */
 type FreezeMode = 'deep' | 'shallow' | 'none'
 
 const FREEZE_MODE = (process.env.LAZY_INIT_FREEZE_MODE || 'deep') as FreezeMode
@@ -15,7 +19,7 @@ const ownKeys = (typeof Reflect !== 'undefined' && Reflect.ownKeys) ||
  * Recursively calls `Object.freeze` on objects/arrays.
  * @internal
  */
-const deepFreeze = (obj: object): object => {
+const deepFreeze = <T>(obj: T): T => {
    if (Array.isArray(obj)) {
       for (let i = 0; i < obj.length; i++) {
          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
@@ -40,7 +44,7 @@ export const freeze = FREEZE_MODE === 'deep'
    : FREEZE_MODE === 'shallow'
    ? Object.freeze
    : FREEZE_MODE === 'none'
-   ? (obj: object): object => obj // noop
+   ? <T>(obj: T): T => obj // noop
    : assert(
       false,
       `[lazy-init]: Invalid value for "LAZY_INIT_FREEZE_MODE": ${FREEZE_MODE as string}. Possible values are: 'deep', 'shallow', 'none'.`

@@ -1,5 +1,5 @@
 import { lz, lzc } from 'lazy-init'
-import type { LazyOptions } from '../src/methods'
+import type { LazyOptions } from '../src/options'
 
 const satisfiesOptions = (a: object, b: object, options: LazyOptions) => {
    const { cache = false, freeze = false } = options

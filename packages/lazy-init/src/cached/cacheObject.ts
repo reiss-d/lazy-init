@@ -1,8 +1,9 @@
 import { isObjectLoose, isUndefined } from 'uft'
 import { stableHash } from './stableHash'
 
-type HashToObjectMap = Map<string, any>
+type HashToObjectMap = Map<string, object>
 const cacheStore: HashToObjectMap = new Map()
+
 /**
  * Frozen objects return the same hash as non-frozen
  * objects so we need to store them separately.
@@ -33,7 +34,7 @@ export const cacheObject = <T>(value: T, isFrozen?: boolean): T => {
    try {
       const hash = stableHash(value)
       const store = isFrozen ? cacheStoreFrozen : cacheStore
-      let obj = store.get(hash) as T | undefined
+      let obj = store.get(hash) as (T & object) | undefined
 
       if (isUndefined(obj)) {
          obj = value

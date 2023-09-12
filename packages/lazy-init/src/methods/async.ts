@@ -1,6 +1,11 @@
 /* eslint-disable lazy-init/require-await */
-import { assert, isDefined, isString, retry } from 'uft'
-import { cacheObject } from '../cached'
+import { assert, isDefined, isRetryOK, isString, isUndefined, retry } from 'uft'
+import {
+   type LazyOptions,
+   applyLazyOptions,
+   defaultOptions,
+   normalizeOptions,
+} from '../options'
 
 interface PromiseMap extends Map<string, Promise<any>> {
    get<T>(key: string): Promise<T> | undefined
@@ -9,7 +14,7 @@ interface PromiseMap extends Map<string, Promise<any>> {
 const promises = new Map() as PromiseMap
 
 /**
- * Options object for the `lz.async`/`lazyAsync` method.
+ * Options object for the `lz.async` method.
  * @typeParam R - type of the awaited value returned by `fn`.
  */
 export type LazyAsyncOptions<R> = {
@@ -30,15 +35,9 @@ export type LazyAsyncOptions<R> = {
     */
    fallback?: R
    /**
-    * Set `true` to cache the object returned by the function.
-    * Objects returned by functions are never cached by default.
-    *
-    * @default false
-    */
-   cache?: boolean
-   /**
     * The number of attempts to retry the asynchronous function before
     * throwing an error.
+    * This means the function will be called at most `retries + 1` times.
     * @default 0
     */
    retries?: number
@@ -55,7 +54,7 @@ export type LazyAsyncOptions<R> = {
     * Called if the asynchronous function throws an error.
     */
    onError?: (err: unknown) => void
-}
+} & LazyOptions
 
 /**
  * Lazily initializes the result of an asynchronous function by
@@ -66,15 +65,15 @@ export type LazyAsyncOptions<R> = {
  * - a promise that will resolve once the data is fetched
  * - the already fetched data.
  *
- * @param fn The Asynchronous function to be lazily initialized.
- * @param options optional [LazyAsyncOptions](https://github.com/reiss-d/lazy-init#LazyAsyncOptions) object.
+ * @param fn The asynchronous function to be lazily initialized.
+ * @param options Optional {@link LazyAsyncOptions} object.
  * @returns The awaited value returned by `fn`.
  *
  * @example
  * ```ts
- * // `lz.async` must be called inside an `async` function
+ * // `lz.async` must be called inside an `async` function.
  * const foo = async () => {
- *   // `await` is not required
+ *   // `await` is not required.
  *   const result = lz.async(async () => {
  *     console.log('fetching')
  *     const data = await fetchData()
@@ -102,13 +101,12 @@ export type LazyAsyncOptions<R> = {
  */
 export async function lazyAsync<R>(
    fn: () => Promise<R>,
-   options: LazyAsyncOptions<R> = {}
+   options: LazyAsyncOptions<R> = defaultOptions
    // @ts-expect-error - TS expects a promise to be returned
 ): R {
    let {
       key,
       fallback,
-      cache = false,
       retries = 0,
       retryInterval = 250,
       onInitialized,
@@ -135,9 +133,16 @@ export async function lazyAsync<R>(
 
    let promise = promises.get<R>(key)
 
-   if (!isDefined(promise)) {
+   if (isUndefined(promise)) {
       promise = new Promise((resolve, reject) => {
-         const cleanup = () => promises.delete(key!)
+         let ranCleanup = false
+
+         const cleanup = () => {
+            if (!ranCleanup) {
+               promises.delete(key!)
+               ranCleanup = true
+            }
+         }
 
          const onReject = (err: unknown) => {
             if (process.env.NODE_ENV !== 'production') {
@@ -155,15 +160,27 @@ export async function lazyAsync<R>(
          }
 
          const onResolve = (res: R) => {
-            resolve(cache ? cacheObject(res) : res)
-            onInitialized?.(res)
+            try {
+               const result = applyLazyOptions(
+                  res,
+                  normalizeOptions(options, false)
+               )
+               assert(
+                  isDefined(result),
+                  '[lazy-init]: `lz.async` returned `undefined`, this will cause your function to run everytime it finishes resolving.'
+               )
+               resolve(result)
+               onInitialized?.(result)
+               cleanup()
+            } catch (err) {
+               onReject(err)
+            }
          }
 
          retry(fn, retries, retryInterval)
             .then((res) => {
-               if ('ok' in res) {
+               if (isRetryOK(res)) {
                   onResolve(res.ok)
-                  cleanup()
                } else {
                   onReject(res.err)
                }

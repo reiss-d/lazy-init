@@ -1,39 +1,11 @@
-import { normalizeOptions } from '../utils'
-import { cacheObject, freeze } from '../cached'
+import { isUndefined } from 'uft'
+import {
+   type LazyOptions,
+   applyLazyOptions,
+   defaultCacheOptions,
+   normalizeOptions,
+} from '../options'
 import type { Infer, NoInfer } from '../types'
-
-/**
- * Options object for the `lz` function.
- */
-export type LazyOptions = {
-   /**
-    * Set `true` to freeze the value.
-    * @default false
-    */
-   freeze?: boolean
-   /**
-    * Set `true` to cache the value.
-    * Setting `true` | `false` will override the default behavior.
-    *
-    * Import from `"lazy-init/cache"` to **enable** caching by default.
-    */
-   cache?: boolean
-}
-
-/**
- * Applies the `LazyOptions` to the given `value`.
- * @internal
- */
-export const applyLazyOptions = (
-   value: object,
-   options: LazyOptions
-): object => {
-   options.freeze && freeze(value)
-
-   return options.cache
-      ? cacheObject(value, options.freeze)
-      : value
-}
 
 /**
  * Lazily initialize any non-primitive value by only creating it **once**.
@@ -70,18 +42,16 @@ export const applyLazyOptions = (
  * foo === diff // false
  * ```
  * #### Default Caching Behavior
- * *Import path changes the default caching behavior.*
  * @example
  * ```ts
- * // not cached by default
- * import { lz } from 'lazy-init'
- *   lz({ a: 1 }) // not cached
- *   lz({ b: 1 }, { cache: true }) // cached
+ * import { lz, lzc } from 'lazy-init'
  *
+ * // not cached by default
+ * lz({ a: 1 }) // not cached
+ * lz({ b: 1 }, { cache: true }) // cached
  * // cached by default
- * import { lz } from 'lazy-init/cache'
- *   lz({ c: 1 }) // cached
- *   lz({ d: 1 }, { cache: false }) // not cached
+ * lzc({ c: 1 }) // cached
+ * lzc({ d: 1 }, { cache: false }) // not cached
  * ```
  * #### Use Case - React Hook
  * @example
@@ -138,29 +108,26 @@ export function lazyObj(
 ) {
    if (!optionsOrFreeze) { return value }
 
-   const options = normalizeOptions(optionsOrFreeze, false)
-   return applyLazyOptions(value, options)
+   return applyLazyOptions(
+      value,
+      normalizeOptions(optionsOrFreeze, false)
+   )
 }
 
 export type LazyObj = typeof lazyObj
 
-const defaultCacheOptions: LazyOptions = { cache: true, freeze: true }
-
 /**
- * `lazyObj` with caching enabled by default to be exported
- * from `"lazy-init/cache"`.
- *
- * See {@link lazyObj} above.
- *
+ * `lazyObj` with caching enabled by default to be exported as `lzc`.
  * @internal
  */
 export const lazyObjCached: LazyObj = (
    value: object,
    optionsOrFreeze?: LazyOptions | boolean
 ) => {
-   if (optionsOrFreeze === undefined) {
-      return applyLazyOptions(value, defaultCacheOptions)
-   }
-   const options = normalizeOptions(optionsOrFreeze, true)
-   return applyLazyOptions(value, options)
+   return applyLazyOptions(
+      value,
+      isUndefined(optionsOrFreeze)
+         ? defaultCacheOptions
+         : normalizeOptions(optionsOrFreeze, true)
+   )
 }
