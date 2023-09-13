@@ -20,8 +20,10 @@ export type LazyFnOptions = {} & LazyOptions
  * @param fn The function to be lazily initialized.
  * @param options Optional {@link LazyFnOptions} object.
  * @returns The value returned by `fn`.
+ * @throws {Error} if the value returned by `fn` is `undefined`.
  *
  * @example
+ * #### Basic Usage
  * ```ts
  * const foo = () => {
  *   const result = lz.fn(() => {
@@ -34,6 +36,7 @@ export type LazyFnOptions = {} & LazyOptions
  * const b = foo() // does not log
  * a === b // true
  * ```
+ *
  * #### Plugin Transformation
  * *original code*
  * ```ts

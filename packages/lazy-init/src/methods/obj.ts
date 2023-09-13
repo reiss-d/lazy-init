@@ -1,10 +1,11 @@
 import { isUndefined } from 'uft'
 import {
-   type LazyOptions,
    applyLazyOptions,
    defaultCacheOptions,
    normalizeOptions,
 } from '../options'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { LazyOptions, ShouldCache, ShouldFreeze } from '../options'
 import type { Infer, NoInfer } from '../types'
 
 /**
@@ -13,11 +14,15 @@ import type { Infer, NoInfer } from '../types'
  * variable. After which the same value will be returned without additional
  * calls to `lz`.
  *
+ * See {@link ShouldCache | caching} and {@link ShouldFreeze | freeze behaviour} for
+ * more information on the available options.
+ *
  * @param value The value to lazily initialize.
- * @param optionsOrFreeze `true` to freeze the value, or an object with configured options.
+ * @param optionsOrFreeze Optional parameter that can be `true` to {@link ShouldFreeze | freeze} the value, or a {@link LazyOptions} object.
  * @returns The initialized value.
  *
  * @example
+ * #### Basic Usage
  * ```ts
  * const foo = () => {
  *   const obj = lz({ a: 1 })
@@ -27,34 +32,8 @@ import type { Infer, NoInfer } from '../types'
  * const b = foo()
  * a === b // true
  * ```
- * #### Caching
- * *Caching results in only a single value ever being created for the given value structure.*
- * @example
- * ```ts
- * const foo = lz({ a: 1 }, { cache: true })
- * const bar = lz({ a: 1 }, { cache: true })
- * foo === bar // true
  *
- * const buzz = lz({ a: 1 }, { cache: false })
- * foo === buzz // false
- *
- * const diff = lz({ a: 2 }, { cache: true })
- * foo === diff // false
- * ```
- * #### Default Caching Behavior
- * @example
- * ```ts
- * import { lz, lzc } from 'lazy-init'
- *
- * // not cached by default
- * lz({ a: 1 }) // not cached
- * lz({ b: 1 }, { cache: true }) // cached
- * // cached by default
- * lzc({ c: 1 }) // cached
- * lzc({ d: 1 }, { cache: false }) // not cached
- * ```
  * #### Use Case - React Hook
- * @example
  * ```ts
  * // `useHook` uses referential equality to compare
  * // it's arguments and if they have changed it will
@@ -74,6 +53,36 @@ import type { Infer, NoInfer } from '../types'
  *   // ...
  * }
  * ```
+ *
+ * #### Caching
+ * Caching results in only a single value ever being created for the given
+ * value structure.
+ * ```ts
+ * const foo = lz({ a: 1 }, { cache: true })
+ * const bar = lz({ a: 1 }, { cache: true })
+ * foo === bar // true
+ *
+ * const buzz = lz({ a: 1 }, { cache: false })
+ * foo === buzz // false
+ *
+ * const diff = lz({ a: 2 }, { cache: true })
+ * foo === diff // false
+ * ```
+ *
+ * To enable caching by default, use the `lzc` method. Note that this has the
+ * implicit side-effect of also freezing by default unless explicitly disabled.
+ * ```ts
+ * import { lz, lzc } from 'lazy-init'
+ *
+ * // not cached by default
+ * lz({ a: 1 }) // not cached
+ * lz({ b: 1 }, { cache: true }) // cached
+ *
+ * // cached by default
+ * lzc({ c: 1 }) // cached
+ * lzc({ d: 1 }, { cache: false }) // not cached
+ * ```
+ *
  * #### Plugin Transformation
  * *original code*
  * ```ts

@@ -68,8 +68,10 @@ export type LazyAsyncOptions<R> = {
  * @param fn The asynchronous function to be lazily initialized.
  * @param options Optional {@link LazyAsyncOptions} object.
  * @returns The awaited value returned by `fn`.
+ * @throws {Error} if the awaited value returned by `fn` is `undefined`.
  *
  * @example
+ * #### Basic Usage
  * ```ts
  * // `lz.async` must be called inside an `async` function.
  * const foo = async () => {
@@ -84,6 +86,7 @@ export type LazyAsyncOptions<R> = {
  * foo() // logs "fetching"
  * foo() // does not log
  * ```
+ *
  * #### Plugin Transformation
  * *original code*
  * ```ts
