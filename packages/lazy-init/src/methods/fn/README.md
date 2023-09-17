@@ -143,10 +143,10 @@ Lazily initializes the result of a function by only running it **once**.
 
 #### Parameters
 
-| Parameter | Type                              | Description                                      |
-| :-------- | :-------------------------------- | :----------------------------------------------- |
-| `fn`      | () => `R`                         | The function to be lazily initialized.           |
-| `options` | [`LazyFnOptions`](#lazyfnoptions) | Optional [LazyFnOptions](#lazyfnoptions) object. |
+| Parameter | Type                              | Description                                                                   |
+| :-------- | :-------------------------------- | :---------------------------------------------------------------------------- |
+| `fn`      | () => `R`                         | The function to be lazily initialized. Must not return `undefined` or `null`. |
+| `options` | [`LazyFnOptions`](#lazyfnoptions) | Optional [LazyFnOptions](#lazyfnoptions) object.                              |
 
 #### Returns
 
@@ -154,7 +154,7 @@ Lazily initializes the result of a function by only running it **once**.
 
 #### Throws
 
-If the value returned by `fn` is `undefined`.
+If the value returned by `fn` is `undefined` or `null`.
 
 #### Alias
 

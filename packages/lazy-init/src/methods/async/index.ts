@@ -1,5 +1,5 @@
 /* eslint-disable lazy-init/require-await */
-import { assert, isDefined, isRetryOK, isString, isUndefined, retry } from 'uft'
+import { assert, isNullish, isRetryOK, isString, isUndefined, retry } from 'uft'
 import {
    type LazyOptions,
    applyLazyOptions,
@@ -68,10 +68,10 @@ export type LazyAsyncOptions<R> = {
  * - a promise that will resolve once the data is fetched
  * - the already fetched data.
  *
- * @param fn The asynchronous function to be lazily initialized.
+ * @param fn The asynchronous function to be lazily initialized. Must not return `undefined` or `null`.
  * @param options Optional {@link LazyAsyncOptions} object.
  * @returns The awaited value returned by `fn`.
- * @throws {Error} if the awaited value returned by `fn` is `undefined`.
+ * @throws {Error} if the awaited value returned by `fn` is `undefined` or `null`.
  *
  * @example
  * #### Basic Usage
@@ -159,8 +159,8 @@ export async function lazyAsync<R>(
             }
             onError?.(err)
 
-            if (isDefined(fallback)) { onResolve(fallback) }
-            else { reject(err) }
+            if (isNullish(fallback)) { reject(err) }
+            else { onResolve(fallback) }
 
             cleanup()
          }
@@ -171,10 +171,7 @@ export async function lazyAsync<R>(
                   res,
                   normalizeOptions(options, false)
                )
-               assert(
-                  isDefined(result),
-                  '[lazy-init]: `lz.async` returned `undefined`, this will cause your function to run everytime it finishes resolving.'
-               )
+               assert(!isNullish(result), onNullishResult)
                resolve(result)
                onInitialized?.(result)
                cleanup()
@@ -199,3 +196,7 @@ export async function lazyAsync<R>(
 }
 
 export type LazyAsyncFn = typeof lazyAsync
+
+const onNullishResult = () =>
+   '[lazy-init]: `lz.async` returned `undefined` or `null`, ' +
+   'this will cause your function to run everytime it finishes resolving.'

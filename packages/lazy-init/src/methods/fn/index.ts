@@ -1,4 +1,4 @@
-import { assert, isDefined } from 'uft'
+import { assert, isNullish } from 'uft'
 import {
    type LazyOptions,
    applyLazyOptions,
@@ -18,10 +18,10 @@ export type LazyFnOptions = {} & LazyOptions
  * The first call to the function will get the result and hoist it into a
  * lazy variable. Subsequent calls will return the lazy variable.
  *
- * @param fn The function to be lazily initialized.
+ * @param fn The function to be lazily initialized. Must not return `undefined` or `null`.
  * @param options Optional {@link LazyFnOptions} object.
  * @returns The value returned by `fn`.
- * @throws {Error} if the value returned by `fn` is `undefined`.
+ * @throws {Error} if the value returned by `fn` is `undefined` or `null`.
  *
  * @example
  * #### Basic Usage
@@ -62,11 +62,12 @@ export function lazyFn<R>(
       fn(),
       normalizeOptions(options, false)
    )
-   assert(
-      isDefined(result),
-      '[lazy-init]: `lz.fn` returned `undefined`, this will cause your function to run everytime it is called.'
-   )
+   assert(!isNullish(result), onNullishResult)
    return result
 }
 
 export type LazyFn = typeof lazyFn
+
+const onNullishResult = () =>
+   '[lazy-init]: `lz.fn` returned `undefined` or `null`, ' +
+   'this will cause your function to run everytime it is called.'

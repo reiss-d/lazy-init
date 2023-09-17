@@ -89,10 +89,10 @@ it **once**.
 
 #### Parameters
 
-| Parameter | Type                                           | Description                                            |
-| :-------- | :--------------------------------------------- | :----------------------------------------------------- |
-| `fn`      | () => `Promise`\<`R`\>                         | The asynchronous function to be lazily initialized.    |
-| `options` | [`LazyAsyncOptions`](#lazyasyncoptions)\<`R`\> | Optional [LazyAsyncOptions](#lazyasyncoptions) object. |
+| Parameter | Type                                           | Description                                                                                |
+| :-------- | :--------------------------------------------- | :----------------------------------------------------------------------------------------- |
+| `fn`      | () => `Promise`\<`R`\>                         | The asynchronous function to be lazily initialized. Must not return `undefined` or `null`. |
+| `options` | [`LazyAsyncOptions`](#lazyasyncoptions)\<`R`\> | Optional [LazyAsyncOptions](#lazyasyncoptions) object.                                     |
 
 #### Returns
 
@@ -100,7 +100,7 @@ it **once**.
 
 #### Throws
 
-If the awaited value returned by `fn` is `undefined`.
+If the awaited value returned by `fn` is `undefined` or `null`.
 
 #### Alias
 
