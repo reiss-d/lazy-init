@@ -1,47 +1,45 @@
 # lazy-init
+
 Lazily initialize values by deferring their creation until first use, resulting in better performance.
 
-## Table of contents
+## Index
 
-* [Installation](#installation)
-  * [Next.js](#next-js-setup)
-  * [SWC](#swc-setup)
-  * [Eslint](#eslint-setup)
-* [Basic Usage](#basic-usage)
-* [API](#api)
-  * [Methods](#methods)
-    * [lz](#lz-method)
-    * [lazyFn](#lz-fn-method)
-    * [lazyAsync](#lz-async-method)
-  * [Option Types](#option-types)
-    * [LazyOptions](#lz-options)
-    * [LazyFnOptions](#lz-fn-options)
-    * [LazyAsyncOptions](#lz-async-options)
-* [Old Versions](#old-versions)
-  * [Next.js](#next-js-old-versions)
-  * [SWC](#swc-old-versions)
+- [Overview](#overview)
+- [Installation](#installation)
+  - [Next.js](#next-js-setup)
+  - [SWC](#swc-setup)
+  - [Eslint](#eslint-setup)
+- [Basic Usage](#basic-usage)
+- [Methods](#methods)
+  - [lz](#methods)
+  - [lazyFn](#methods)
+  - [lazyAsync](#methods)
+- [Caching](#caching)
+- [Freezing](#freezing)
+- [Old Versions](#old-versions)
+  - [Next.js](#next-js-old-versions)
+  - [SWC](#swc-old-versions)
+- [License](#license)
+
 <!-- * [FAQ](#faq) -->
 <!-- * [Benchmarks](#benchmarks) -->
-* [License](#license)
 
 ## Installation
 
 This library **requires** your code is transpilied with [SWC](https://swc.rs).
 
-* If you are using [Next.js](#https://nextjs.org/docs/advanced-features/compiler), this is the default compiler since `v12`.<br>
-* Otherwise, if your project is not yet configured to use [SWC](https://swc.rs), see [SWC - Getting Started](#https://swc.rs/docs/getting-started).
+- If you are using [Next.js](#https://nextjs.org/docs/advanced-features/compiler), this is the default compiler since `v12`.<br>
+- Otherwise, if your project is not yet configured to use [SWC](https://swc.rs), see [SWC - Getting Started](#https://swc.rs/docs/getting-started).
 
 > Support for babel/webpack may be added in the future.
 
 <h3 id="next-js-setup">Next.js</h3>
 
-
-|       Version        |          Supported           |
-| :------------------- |:----------------------------:|
-| `>= 13.3.2`          |              ✅              |
-| `13.2.4 ~ 13.3.1`    |             :bug:            |
-| `<= 13.2.3`          | [See](#next-js-old-versions) |
-
+| Version           |          Supported           |
+| :---------------- | :--------------------------: |
+| `>= 13.3.2`       |              ✅              |
+| `13.2.4 ~ 13.3.1` |            :bug:             |
+| `<= 13.2.3`       | [See](#next-js-old-versions) |
 
 > Next.js v13.2.4 ~ v13.3.1 cannot execute SWC Wasm plugins, [due to a bug](https://github.com/vercel/next.js/issues/46989#issuecomment-1486989081).
 
@@ -57,40 +55,40 @@ pnpm add lazy-init && pnpm add -D @lazy-init/nextjs-plugin
 Add the following to your next config file:
 
 > next.config.js
+
 ```js
 module.exports = {
-  experimental: {
-    swcPlugins: [
-      // empty config object `{}` is required.
-      [require.resolve("@lazy-init/nextjs-plugin"), {}]
-    ]
-  }
+   experimental: {
+      swcPlugins: [
+         // empty config object `{}` is required.
+         [require.resolve('@lazy-init/nextjs-plugin'), {}],
+      ],
+   },
 }
 ```
+
 > next.config.mjs (ESM)
+
 ```js
 import { createRequire } from 'node:module'
 const require = createRequire(import.meta.url)
 
 export default {
-  experimental: {
-    swcPlugins: [
-      // empty config object `{}` is required.
-      [require.resolve("@lazy-init/nextjs-plugin"), {}]
-    ]
-  }
+   experimental: {
+      swcPlugins: [
+         // empty config object `{}` is required.
+         [require.resolve('@lazy-init/nextjs-plugin'), {}],
+      ],
+   },
 }
-
 ```
-
 
 <h3 id="swc-setup">SWC - @swc/core</h3>
 
-|       Version        |          Supported           |
-| :------------------- |:----------------------------:|
-| `>= 1.3.49`          |              ✅              |
-| `<= 1.3.48`          |   [See](#swc-old-versions)   |
-
+| Version     |        Supported         |
+| :---------- | :----------------------: |
+| `>= 1.3.49` |            ✅            |
+| `<= 1.3.48` | [See](#swc-old-versions) |
 
 The `@swc/core` package must be installed first and present in your `package.json` **before** installing `lazy-init`.
 
@@ -106,13 +104,13 @@ The empty config object `{}` is required.
 ```json
 // .swcrc
 {
-  "jsc": {
-    "experimental": {
-      "plugins": [
-        ["@lazy-init/swc-core-plugin", {}]
-      ]
-    }
-  }
+   "jsc": {
+      "experimental": {
+         "plugins": [
+            ["@lazy-init/swc-core-plugin", {}]
+         ]
+      }
+   }
 }
 ```
 
@@ -124,7 +122,7 @@ This step is only necessary if you are using [@typescript-eslint](#https://types
 # using npm
 npm install --save-dev eslint-plugin-lazy-init 
 # using pnpm
-pnpm add -D eslint-plugin-lazy-init 
+pnpm add -D eslint-plugin-lazy-init
 ```
 
 ```js
@@ -137,301 +135,159 @@ module.exports = {
   }
 }
 ```
+
 ## Basic Usage
 
+For more in-depth examples, see the per method [documentation](#methods).
+
 ```ts
-import { lz } from "lazy-init" // ESM
-const { lz } = require("lazy-init") // Common JS
-```
-```ts
+import { lz, lzc } from 'lazy-init' // ESM
+const { lz, lzc } = require('lazy-init') // Common JS
+
 // call `lz` for non-primitive values
-lz({ a: 'foo' })
+lz({ foo: 1 })
 lz([1, 2, 3])
 lz(new Map([['key', 'value']]))
 
-// `lz.fn` (lazyFn) for sync functions
+// call `lz.fn` for sync functions
 lz.fn(() => {})
 
-// `lz.async` (lazyAsync) for async functions
+// call `lz.async` for async functions
 lz.async(async () => {})
+
+// call `lzc` to cache by default
+const first = lzc({ a: 'foo' })
+const second = lzc({ a: 'foo' })
+
+console.log(first === second) // true
 ```
-
-# API
-
-<!---------- START: lz method ---------->
 
 ## Methods
 
-<h3 id="lz-method">lz</h3>
+Click the method to see its documentation:
 
-▸ **lz**<`T`>(`value`, `options?`): `T`
+- [`lz`](https://github.com/reiss-d/lazy-init/blob/main/packages/lazy-init/src/methods/obj/README.md)
+- [`lz.fn`](https://github.com/reiss-d/lazy-init/blob/main/packages/lazy-init/src/methods/fn/README.md)
+- [`lz.async`](https://github.com/reiss-d/lazy-init/blob/main/packages/lazy-init/src/methods/async/README.md)
 
-Lazily initialize any non-primitive value by only creating it **once**.
-The first call to `lz` will create the value and hoist
-it into a lazy variable. After which the same value will
-be returned without additional calls to `lz`.
+## Caching
 
-#### Parameters
+Caching results in only a single value ever being created for the given
+value structure. This can improve performance and reduce memory usage.
 
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `value` | `T` | The value to lazily initialize. |
-| `options?` | `boolean` \| [`LazyOptions`](#lz-options) | `true` to freeze the value, or an object with configured options. |
-
-#### Returns
-
-`T` - The initialized value.
-
-**`Example`**
+Caching can be enabled by setting the `cache` property to `true` on a
+options object or by using the `lzc` method where caching is enabled by
+default.
 
 ```ts
-const foo = () => {
-  const obj = lz({ a: 1 })
-  return obj
-}
-const a = foo()
-const b = foo()
-a === b // true
-```
-#### Caching
-Caching results in only a single value ever being created for the given value structure.
+// using `lz`
+lz({}) // not cached
+lz({}, { cache: true }) // cached
 
-**`Example`**
+// using `lzc`
+lzc({}) // cached
+lzc({}, { cache: false }) // not cached
+```
+
+When caching is enabled, the value will also be frozen unless you explicitly
+say otherwise. This is because caching an object that is not frozen is
+dangerous.
+
+The object may mistakenly be mutated by the user, yet other
+recipients of this cached object do not expect it to change.
 
 ```ts
-  const foo = lz({ a: 1 }, { cache: true })
-  const bar = lz({ a: 1 }, { cache: true })
-  foo === bar // true
-  const buzz = lz({ a: 1 }, { cache: false })
-  foo === buzz // false
-  const diff = lz({ a: 2 }, { cache: true })
-  foo === diff // false
-```
-#### Default Caching Behavior
-Import path changes the default caching behavior.
+// using `lz`
+lz({}) // N/A
+lz({}, { cache: true, freeze: false }) // cached
+lz({}, { cache: true }) // cached & frozen
 
-**`Example`**
+// using `lzc`
+lzc({}) // cached & frozen
+lzc({}, { freeze: false }) // cached
+lzc({}, { cache: false }) // N/A
+```
+
+Referentially comparing cached and non-cached values:
 
 ```ts
-// not cached by default
-import { lz } from 'lazy-init'
-  lz({ a: 1 }) // not cached
-  lz({ b: 1 }, { cache: true }) // cached
-
-// cached by default
-import { lz } from 'lazy-init/cache'
-  lz({ c: 1 }) // cached
-  lz({ d: 1 }, { cache: false }) // not cached
+// `cfoo` and `cbar` share the same structure and are both
+// cached, therefore they are the same object.
+const cfoo = lzc({ a: 1 })
+const cbar = lzc({ a: 1 })
+cfoo === cbar // true
 ```
-#### Use Case - React Hook
-
-**`Example`**
 
 ```ts
-// `useHook` uses referential equality to compare
-// it's arguments and if they have changed it will
-// re-calculate the expensive value.
-import { useHook } from 'some-lib'
-
-// this component will re-run the expensive
-// calculation every time it renders.
-const Component = () => {
-  const expensiveValue = useHook({ users: 100 })
-  // ...
-}
-// using `lz` this component will only run the
-// expensive calculation once.
-const BetterComponent = () => {
-  const expensiveValue = useHook(lz({ users: 100 }))
-  // ...
-}
+// `cfoo` and `buzz` share the same structure, however, `buzz`
+//  is not cached, therefore they are different objects.
+const buzz = lzc({ a: 1 }, { cache: false })
+cfoo === buzz // false
 ```
-#### Plugin Transformation
-> *original code*
-```ts
-const foo = () => {
-  const obj = lz({ a: 1 })
-}
-```
-> *transformed code*
-```ts
-var lzVar; // hoisted variable
-const foo = () => {
-  const obj = lzVar ?? (lzVar = lz({ a: 1 }))
-}
-```
-<!---------- END: lz method ---------->
-___
-
-<!---------- START: lazyFn method ---------->
-
-<h3 id="lz-fn-method">lazyFn</h3>
-
-▸ **lz.fn**<`R`\>(`fn`, `options?`): `R`
-
-Lazily initializes the result of a function by only running it **once**.
-
-The first call to the function will get the result and hoist it into a lazy variable.<br>
-Subsequent calls will return the lazy variable.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `fn` | () => `R` | The function to be lazily initialized. |
-| `options` | [`LazyFnOptions`](#lz-fn-options)<`R`\> | Optional object with configured options. |
-
-#### Returns
-
-`R` - The value returned by `fn`.
 
 ```ts
-const foo = () => {
-  const result = lz.fn(() => {
-     console.log('this will only be logged once')
-     return { bar: 1 }
-  })
-  return result // { bar: 1 }
-}
-const a = foo() // logs "this will only be logged once"
-const b = foo() // does not log
-a === b // true
+// `cfoo` and `cdiff` are cached, however, they do not share the
+// same structure and are therefore different objects.
+const cdiff = lzc({ a: 5 })
+cfoo === cdiff // false
 ```
-#### Plugin Transformation
-> *original code*
-```ts
-const foo = () => {
-  const result = lz.fn(() => ({ a: 1 }))
-}
-```
-> *transformed code*
-```ts
-var lzVar;
-const foo = () => {
-  const result = lzVar ?? (lzVar = lz.fn(() => ({ a: 1 })))
-}
-```
-<!---------- END: lazyFn method ---------->
-___
 
-<!---------- START: lazyAsync method ---------->
-
-<h3 id="lz-async-method">lazyAsync</h3>
-
-▸ **lz.async**<`R`\>(`fn`, `options?`): `R`
-
-Lazily initializes the result of an asynchronous function by only running it **once**.
-
-The first call to the function will fetch the result.
-Subsequent calls will return either:
-- a promise that will resolve once the data is fetched
-- the already fetched data.
-
-#### Parameters
-
-| Name | Type | Description |
-| :------ | :------ | :------ |
-| `fn` | () => `Promise`<`R`\> | The asynchronous function to be lazily initialized. |
-| `options` | [`LazyAsyncOptions`](#lz-async-options)<`R`\> | Optional object with configured options. |
-
-#### Returns
-`R` - the awaited value returned by `fn`.
+There are separate caches for frozen and non-frozen objects. Therefore,
+frozen and non-frozen objects with the same structure will not be the same
+object.
 
 ```ts
-// `lz.async` must be called inside an `async` function
-const foo = async () => {
-  // `await` is not required
-  const result = lz.async(async () => {
-    console.log('fetching')
-    const data = await fetchData()
-    return data.json()
-  })
-  return result
-}
-foo() // logs "fetching"
-foo() // does not log
+const cfoo = lzc({ a: 1 })
+const cbar = lzc({ a: 1 }, { freeze: false })
+cfoo === cbar // false
 ```
-#### Plugin Transformation
-> *original code*
+
+## Freezing
+
+By default, freezing a value will perform a deep freeze on it.
+
+To change this behaviour, set the environment variable `LAZY_INIT_FREEZE_MODE`
+to one of the following values:
+
+- `"deep"` (default)
+- `"shallow"`
+- `"none"`
+
+### Deep Freeze
+
+The values of each key and symbol property will be recursively frozen.
+However, this only applies to arrays and plain objects. Other objects such
+as `Set` and `Map` will not be frozen.
+
 ```ts
-const foo = async () => {
-  const data = lz.async(() => fetch())
-}
+const foo = lz({
+   val: 'bar',
+   obj: { a: 0, b: [], c: new Set() },
+}, true)
+foo.val = 'buzz' // error
+foo.obj.a = 2 // error
+foo.obj.b.push(1) // error
+foo.obj.c.add(1) // ok
+foo.obj.c = null // error
 ```
-> *transformed code - notice the `await` has been added*
+
+### Shallow Freeze
+
+Only the value itself will be frozen, not any of its array/object properties.
+
 ```ts
-var lzVar;
-const foo = async () => {
-  const data = lzVar ?? (lzVar = await lz.async(() => fetch()))
-}
+const foo = lz({
+   val: 'bar',
+   obj: { a: 0 },
+}, true)
+foo.val = 'buzz' // error
+foo.obj.a = 2 // ok
+foo.obj = {} // error
 ```
-<!---------- END: lazyAsync method ---------->
-___
 
-<!---------- START: option type decals ---------->
+### None
 
-## Option Types
-
-
-*<h3 id="lz-options">LazyOptions</h3>*
-
-Options object for the [`lz`](#lz-method) method.
-
-Ƭ **LazyOptions**: `Object`
-
-#### Type declaration
-
-| Name | Type | Description | Default |
-| :------ | :------ | :------ | :------ |
-| `cache?` | `boolean` | Set `true` to cache the value. Setting `true` \| `false` will override the default behavior. See [default cache behaviour](#default-caching-behavior).
-| `freeze?` | `boolean` | Set `true` to freeze the value. | `false` |
-
-___
-
-
-*<h3 id="lz-fn-options">LazyFnOptions</h3>*
-
-Options object for the [`lz.fn`](#lz-fn-method) / [`lazyFn`](#lz-fn-method) method.
-
-Ƭ **LazyFnOptions**: `Object`
-
-#### Type declaration
-
-| Name | Type | Description | Default |
-| :------ | :------ | :------ | :------ |
-| `cache?` | `boolean` | Set `true` to cache the value returned by the function. Values returned by functions are never cached by default. | `false` |
-
-___
-
-
-*<h3 id="lz-async-options">LazyAsyncOptions</h3>*
-
-Options object for the [`lz.async`](#lz-async-method) / [`lazyAsync`](#lz-async-method) method.
-
-Ƭ **LazyAsyncOptions**<`R`\>: `Object`
-
-#### Type parameters
-
-| Name | Description |
-| :------ | :------ |
-| `R` | Type of the awaited value returned by `fn`. |
-
-#### Type declaration
-
-| Name | Type | Description | Default |
-| :------ | :------ | :------ | :------ |
-| `cache?` | `boolean` | Set `true` to cache the value returned by the function. Values returned by functions are never cached by default. | `false` |
-| `fallback?` | `R` | Provide a fallback value that will be used if the asynchronous function throws an error. If no fallback value is provided, the error will be thrown. |
-| `key?` | `string` | A unique identifier used to deduplicate multiple calls to the function before the asynchronous value has been initialized. | [`see`](#asynckey) |
-| `onError?` | (`err`: `unknown`) => `void` | Called if the asynchronous function throws an error. |
-| `onInitialized?` | (`res`: `R`) => `void` | Called when the asynchronous function is successfully resolved. |
-| `retries?` | `number` | The number of attempts to retry the asynchronous function before throwing an error. | `0` |
-| `retryInterval?` | `number` | The time *(ms)* to wait between each retry attempt. | `250` |
-
-#### AsyncKey
-The lazy-init plugin will automatically generate a 12 char alphanumeric unique key. However, you may provide your own value if needed.
-<!---------- END: option type decals ---------->
-___
+The value will not be frozen.
 
 ## Old Versions
 
@@ -439,22 +295,19 @@ To use older versions compatible with your framework, install the plugin using i
 
 <h3 id="next-js-old-versions">Next.js</h3>
 
-
-|       Version        |             Install              |
-| :------------------- |:--------------------------------:|
-| `13.1.4 ~ 13.2.3`    | `@lazy-init/nextjs-plugin@2.2.0` |
-
+| Version           |             Install              |
+| :---------------- | :------------------------------: |
+| `13.1.4 ~ 13.2.3` | `@lazy-init/nextjs-plugin@2.2.0` |
 
 <h3 id="swc-old-versions">SWC - @swc/core</h3>
 
-|       Version        |             Install              |
-| :------------------- |:--------------------------------:|
-| `1.3.40 ~ 1.3.42`    | `@lazy-init/nextjs-plugin@2.2.0` |
-| `1.3.29 ~ 1.3.38`    | `@lazy-init/nextjs-plugin@2.2.0` |
-
-___
-
+| Version           |             Install              |
+| :---------------- | :------------------------------: |
+| `1.3.40 ~ 1.3.42` | `@lazy-init/nextjs-plugin@2.2.0` |
+| `1.3.29 ~ 1.3.38` | `@lazy-init/nextjs-plugin@2.2.0` |
 
 ## License
 
 See [license](./LICENSE).
+
+---

@@ -3,23 +3,21 @@ import {
    applyLazyOptions,
    defaultCacheOptions,
    normalizeOptions,
-} from '../options'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type { LazyOptions, ShouldCache, ShouldFreeze } from '../options'
-import type { Infer, NoInfer } from '../types'
+} from '../../options'
+import type { LazyOptions } from '../../options'
+import type { Infer, NoInfer } from '../../types'
 
 /**
  * Lazily initialize any non-primitive value by only creating it **once**.
+ *
  * The first call to `lz` will create the value and hoist it into a lazy
  * variable. After which the same value will be returned without additional
  * calls to `lz`.
  *
- * See {@link ShouldCache | caching} and {@link ShouldFreeze | freeze behaviour} for
- * more information on the available options.
- *
  * @param value The value to lazily initialize.
- * @param optionsOrFreeze Optional parameter that can be `true` to {@link ShouldFreeze | freeze} the value, or a {@link LazyOptions} object.
+ * @param optionsOrFreeze Optional parameter that can be `true` to freeze the value, or a {@link LazyOptions} object.
  * @returns The initialized value.
+ * @see {@link https://github.com/reiss-d/lazy-init/blob/main/README.md | Full documentation}.
  *
  * @example
  * #### Basic Usage

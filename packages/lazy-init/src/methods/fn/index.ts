@@ -4,10 +4,11 @@ import {
    applyLazyOptions,
    defaultOptions,
    normalizeOptions,
-} from '../options'
+} from '../../options'
 
 /**
  * Options object for the `lz.fn` method.
+ * Extends {@link LazyOptions}.
  */
 export type LazyFnOptions = {} & LazyOptions
 

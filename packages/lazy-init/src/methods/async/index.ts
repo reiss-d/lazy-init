@@ -5,7 +5,7 @@ import {
    applyLazyOptions,
    defaultOptions,
    normalizeOptions,
-} from '../options'
+} from '../../options'
 
 interface PromiseMap extends Map<string, Promise<any>> {
    get<T>(key: string): Promise<T> | undefined
@@ -15,6 +15,8 @@ const promises = new Map() as PromiseMap
 
 /**
  * Options object for the `lz.async` method.
+ * Extends {@link LazyOptions}.
+ *
  * @typeParam R - type of the awaited value returned by `fn`.
  */
 export type LazyAsyncOptions<R> = {
@@ -57,11 +59,12 @@ export type LazyAsyncOptions<R> = {
 } & LazyOptions
 
 /**
- * Lazily initializes the result of an asynchronous function by
- * only running it **once**.
+ * Lazily initializes the result of an asynchronous function by only running
+ * it **once**.
  *
- * The first call to the function will fetch the result.
- * Subsequent calls will return either:
+ * The first call to the function will fetch the result. Subsequent calls will
+ * return either:
+ *
  * - a promise that will resolve once the data is fetched
  * - the already fetched data.
  *

@@ -43,7 +43,7 @@
       "clean": "shx rm -rf dist && shx mkdir -p dist && pnpm copy",
       "copy": "shx cp ../../README.md package.json LICENSE dist && json -I -f dist/package.json -e \"this.publishConfig=undefined; this.devDependencies=undefined; this.scripts=undefined;\"",
       "test": "jest",
-      "typedoc": "typedoc --excludeExternals"
+      "typedoc": "typedoc"
    },
    "dependencies": {
       "uft": "^0.1.3"
