@@ -2,9 +2,8 @@
 const nextConfig = {
    reactStrictMode: true,
    experimental: {
-      appDir: true,
       swcPlugins: [
-         [require.resolve('@lazy-init/nextjs-plugin'), {}],
+         [require.resolve('@lazy-init/plugin-swc-v83'), {}],
       ],
    },
 }

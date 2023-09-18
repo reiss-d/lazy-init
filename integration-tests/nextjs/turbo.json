@@ -9,8 +9,7 @@
             "app/**/*.tsx",
             "next.config.js",
             "next.config.mjs",
-            "tsconfig.json",
-            "../../integration-test.js"
+            "tsconfig.json"
          ],
          "outputs": [".next/**", "!.next/cache/**"],
          "outputMode": "errors-only"

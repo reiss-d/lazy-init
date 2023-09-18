@@ -1,0 +1,24 @@
+{
+   "name": "integrations-nextjs",
+   "version": "0.0.0",
+   "license": "MIT",
+   "private": true,
+   "scripts": {
+      "clean": "shx rm -rf .next",
+      "start": "next start",
+      "test": "pnpm clean && next build"
+   },
+   "dependencies": {
+      "lazy-init": "workspace:*",
+      "next": "13.4.20-canary.39",
+      "react": "18.2.0",
+      "react-dom": "18.2.0"
+   },
+   "devDependencies": {
+      "@lazy-init/plugin-swc-v83": "workspace:*",
+      "@types/node": "^18.16.3",
+      "@types/react": "^18.2.0",
+      "@types/react-dom": "^18.2.1",
+      "typescript": "^5.2.2"
+   }
+}

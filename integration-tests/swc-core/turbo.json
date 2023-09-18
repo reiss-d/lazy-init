@@ -7,8 +7,7 @@
          "inputs": [
             "src/**/*.ts",
             ".swcrc",
-            "tsconfig.json",
-            "../../integration-test.js"
+            "tsconfig.json"
          ],
          "outputs": ["dist/**"],
          "outputMode": "errors-only"

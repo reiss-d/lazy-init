@@ -3,11 +3,6 @@
    "version": "0.0.0",
    "license": "MIT",
    "description": "Lazily initialize values by deferring their creation until first use, resulting in better performance.",
-   "workspaces": [
-      "configs/*",
-      "crates/*",
-      "packages/*"
-   ],
    "private": true,
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
    "repository": "https://github.com/reiss-d/lazy-init.git",
@@ -22,6 +17,7 @@
       "test": "pnpm e:dev pnpm install && turbo run test --continue",
       "test:pkgs": "pnpm e:dev turbo run test --filter=./packages/*",
       "test:crates": "pnpm e:dev turbo run test --filter=./crates/*",
+      "test:integration": "pnpm e:dev turbo run test --filter=./integration-tests/*",
       "typedoc": "pnpm e:dev turbo run typedoc",
       "bench": "pnpm e:dev turbo run bench --filter=./packages/benchmark",
       "release": "pnpm e:prod turbo run release --no-cache --force && pnpm publish -r",

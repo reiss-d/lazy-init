@@ -4,7 +4,7 @@
       "lib": ["ESNext"],
       "module": "CommonJS",
       "moduleResolution": "node",
-      "outDir": "dist/node",
+      "outDir": "dist",
       "esModuleInterop": true,
       "isolatedModules": true,
       "allowSyntheticDefaultImports": true,

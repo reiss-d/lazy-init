@@ -1,3 +1,12 @@
+/**
+ * No longer in use.
+ *
+ * This file is mainly used to make sure types work on older versions of TS,
+ * however, it made sense to do this when we needed to downlevel our types.
+ * Now that we don't need to do that, this test is not necessary.
+ * Leaving it here for now, in case we need it in the future.
+ */
+
 // @ts-check
 const path = require('path')
 const shelljs = require('shelljs')
