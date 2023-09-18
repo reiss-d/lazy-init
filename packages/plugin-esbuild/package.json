@@ -1,0 +1,39 @@
+{
+   "name": "@lazy-init/plugin-esbuild",
+   "version": "1.0.0",
+   "license": "MIT",
+   "description": "ESBuild plugin for use with lazy-init.",
+   "homepage": "https://github.com/reiss-d/lazy-init#readme",
+   "repository": "https://github.com/reiss-d/lazy-init.git",
+   "bugs": "https://github.com/reiss-d/lazy-init/issues",
+   "author": "Reiss Davidson",
+   "publishConfig": {
+      "directory": "dist",
+      "linkDirectory": true
+   },
+   "main": "./index.js",
+   "module": "./index.mjs",
+   "types": "./index.d.ts",
+   "sideEffects": false,
+   "scripts": {
+      "build": "pnpm clean && tsup-node --config tsup.config.ts",
+      "clean": "shx rm -rf dist && shx mkdir -p dist && pnpm copy",
+      "copy": "shx cp package.json LICENSE dist",
+      "test": "jest"
+   },
+   "dependencies": {
+      "uft": "^0.1.3"
+   },
+   "devDependencies": {
+      "@lazy-init/plugin-swc-v83": "workspace:*",
+      "@swc/cli": "^0.1.62",
+      "@swc/core": "1.3.85",
+      "@swc/helpers": "^0.5.2",
+      "@swc/jest": "^0.2.29",
+      "eslint-config-internal-ts": "workspace:*",
+      "eslint-plugin-lazy-init": "workspace:*",
+      "tsconfig": "workspace:*",
+      "tsup": "^7.2.0",
+      "typescript": "^5.2.2"
+   }
+}
