@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { lz, lazyAsync } from "lazy-init";
+import { lz, lzc } from "lazy-init";
 import { fetchData } from "some-lib";
 
 export const someAsyncFn = async () => {
@@ -11,5 +11,5 @@ export const someAsyncFn = async () => {
 };
 
 export const someOtherAsyncFn = async () => {
-   return lazyAsync(fetchData, { fallback: { foo: 'bar' }});
+   return lzc.async(fetchData, { fallback: { foo: 'bar' }});
 };

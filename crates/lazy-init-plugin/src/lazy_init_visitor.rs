@@ -51,7 +51,7 @@ impl TransformVisitor {
         true_or_return!(!self.lazy_fns.populated);
         self.lazy_fns.populated = true;
 
-        let methods = ["lz", "lazyAsync", "lazyFn"].into_iter().chain(
+        let methods = ["lz", "lzc"].into_iter().chain(
             self.config
                 .lazy_fns
                 .iter()

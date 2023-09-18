@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { lz, lazyAsync } from "lazy-init";
+import { lz, lzc } from "lazy-init";
 import { fetchData } from "some-lib";
 
 var lzVar, lzVar1;
@@ -13,5 +13,5 @@ export const someAsyncFn = async () => {
 };
 
 export const someOtherAsyncFn = async () => {
-   return (lzVar1 ?? (lzVar1 = await lazyAsync(fetchData, { fallback: { foo: 'bar' }}, "uniquekey123")));
+   return (lzVar1 ?? (lzVar1 = await lzc.async(fetchData, { fallback: { foo: 'bar' }}, "uniquekey123")));
 };
