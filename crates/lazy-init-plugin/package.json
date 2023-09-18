@@ -13,7 +13,7 @@
    },
    "main": "./swc_plugin_lazy_init.wasm",
    "scripts": {
-      "build": "cargo build -p swc_plugin_lazy_init --release --no-default-features --features use-plugin_transform --target wasm32-wasi && shx cp ../../target/wasm32-wasi/release/swc_plugin_lazy_init.wasm ./dist",
+      "build": "cargo build -p swc_plugin_lazy_init --release --no-default-features --features use-plugin_transform --target wasm32-wasi && shx cp ../../target/wasm32-wasi/release/swc_plugin_lazy_init.wasm ./package.json ./dist",
       "test": "cargo test -p swc_plugin_lazy_init --no-default-features --features use-testing -- --show-output"
    }
 }
