@@ -1,6 +1,6 @@
 {
    "name": "@lazy-init/plugin-swc-v83",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "license": "MIT",
    "description": "SWC plugin for use with lazy-init.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
