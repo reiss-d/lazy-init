@@ -1,5 +1,5 @@
-use super::*;
-use swc_core::ecma::{ast::Ident, utils::private_ident};
+use swc_ecma_ast::Ident;
+use swc_ecma_utils::private_ident;
 
 #[cfg(not(feature = "use-testing"))]
 use rand::{distributions::Alphanumeric, thread_rng, Rng};

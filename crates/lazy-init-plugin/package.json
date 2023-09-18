@@ -1,12 +1,19 @@
 {
-   "name": "lazy-init-plugin",
-   "version": "3.0.0",
+   "name": "@lazy-init/plugin-swc-v83",
+   "version": "1.0.0",
    "license": "MIT",
    "description": "SWC plugin for use with lazy-init.",
-   "private": true,
+   "homepage": "https://github.com/reiss-d/lazy-init#readme",
+   "repository": "https://github.com/reiss-d/lazy-init.git",
+   "bugs": "https://github.com/reiss-d/lazy-init/issues",
+   "author": "Reiss Davidson",
+   "publishConfig": {
+      "directory": "dist",
+      "linkDirectory": true
+   },
+   "main": "./swc_plugin_lazy_init.wasm",
    "scripts": {
-      "build": "./scripts/build.sh",
-      "test": "./scripts/test.sh",
-      "test:one": "./scripts/test.sh --one"
+      "build": "cargo build -p swc_plugin_lazy_init --release --no-default-features --features use-plugin_transform --target wasm32-wasi && shx cp ../../target/wasm32-wasi/release/swc_plugin_lazy_init.wasm ./dist",
+      "test": "cargo test -p swc_plugin_lazy_init --no-default-features --features use-testing -- --show-output"
    }
 }

@@ -1,53 +1,39 @@
 [package]
+name = "swc_plugin_lazy_init"
+version = "0.0.1"
 authors = ["Reiss Davidson <https://github.com/reiss-d>"]
-description = "SWC plugin for lazily initalizing variables."
 edition = "2021"
 license = "MIT"
-name = "swc_plugin_lazy_init"
 publish = false
-version = "0.0.1"
+description = "SWC plugin for lazily initalizing variables."
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [features]
-use-swc_core_v076 = ["swc_core_v076"]
-use-swc_core_v075 = ["swc_core_v075"]
-
-use-testing = [
-  "swc_core_v076?/ecma_parser",
-  "swc_core_v076?/ecma_transforms",
-  "swc_core_v076?/testing_transform",
-  #
-  "swc_core_v075?/ecma_parser",
-  "swc_core_v075?/ecma_transforms",
-  "swc_core_v075?/testing_transform",
-  #
-  "testing",
-]
+use-testing = []
 use-plugin_transform = [
-  "swc_core_v076?/ecma_plugin_transform",
-  "swc_core_v075?/ecma_plugin_transform",
-  # "swc_core_v069?/ecma_plugin_transform",
+  "swc_core/common",
+  "swc_core/ecma_plugin_transform",
   "rand",
 ]
 
 [dependencies]
-swc_core_v076 = { package = "swc_core", version = "0.76.1", optional = true, features = [
-  "ecma_utils",
-  "ecma_visit",
-  "ecma_ast",
-  "common",
-] }
-swc_core_v075 = { package = "swc_core", version = "0.75.36", optional = true, features = [
-  "ecma_utils",
-  "ecma_visit",
-  "ecma_ast",
-  "common",
-] }
+swc_atoms = "0.5.9"
+swc_common = "0.32.1"
+swc_core = { version = "0.83.14", optional = true }
+swc_ecma_ast = "0.109.1"
+swc_ecma_utils = "0.123.0"
+swc_ecma_visit = "0.95.1"
 
 rand = { version = "0.8.5", optional = true }
+serde = { version = "=1.0.188", features = ["derive"] }
 serde_json = "1"
-serde = { version = "1.0.152", features = ["derive"] }
 tracing = { version = "0.1.37", features = ["release_max_level_off"] }
-testing = { version = "0.31.20", optional = true }
+
+[dev-dependencies]
+swc_ecma_parser = "0.140.0"
+swc_ecma_transforms_base = "0.133.2"
+swc_ecma_transforms_testing = "0.136.1"
+
+testing = "0.34.1"

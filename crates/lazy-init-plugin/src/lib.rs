@@ -29,23 +29,21 @@
 pub mod configs;
 pub mod lazy_init_visitor;
 pub mod macros;
-pub mod swc_core;
 pub mod utils;
 
 #[cfg(feature = "use-testing")]
 pub mod tests;
 
 use serde::{Deserialize, Serialize};
-use swc_core::ecma::ast::*;
 
 #[cfg(feature = "use-plugin_transform")]
-use swc_core::{
-    ecma::{
-        ast::Program,
-        visit::{as_folder, FoldWith},
-    },
-    plugin::{plugin_transform, proxies::TransformPluginProgramMetadata},
+use swc_core::plugin::{
+    plugin_transform, proxies::TransformPluginProgramMetadata,
 };
+#[cfg(feature = "use-plugin_transform")]
+use swc_ecma_ast::Program;
+#[cfg(feature = "use-plugin_transform")]
+use swc_ecma_visit::{as_folder, FoldWith};
 
 // clippy is failing to allow str_to_string in plugin_transform
 #[allow(

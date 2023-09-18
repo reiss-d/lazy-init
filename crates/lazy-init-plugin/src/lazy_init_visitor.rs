@@ -1,13 +1,10 @@
 use super::*;
 use std::collections::HashSet;
-use swc_core::{
-    common::{util::take::Take, DUMMY_SP},
-    ecma::{
-        atoms::JsWord,
-        utils::{undefined, ExprFactory},
-        visit::{noop_visit_mut_type, VisitMut, VisitMutWith},
-    },
-};
+use swc_atoms::JsWord;
+use swc_common::{util::take::Take, DUMMY_SP};
+use swc_ecma_ast::*;
+use swc_ecma_utils::{undefined, ExprFactory};
+use swc_ecma_visit::{noop_visit_mut_type, VisitMut, VisitMutWith};
 use tracing::debug;
 use utils;
 

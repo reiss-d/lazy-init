@@ -2,21 +2,15 @@
 #[cfg(feature = "use-testing")]
 #[cfg(test)]
 pub mod test_fixture {
-    use crate::{configs, lazy_init_visitor, swc_core};
+    use crate::{configs, lazy_init_visitor};
     use configs::PluginConfig;
     use lazy_init_visitor::TransformVisitor;
     use std::path::PathBuf;
-    use swc_core::{
-        common::{chain, Mark},
-        ecma::{
-            parser::{Syntax, TsConfig},
-            transforms::{
-                base::resolver,
-                testing::{test_fixture, FixtureTestConfig},
-            },
-            visit::{as_folder, Fold, VisitMut},
-        },
-    };
+    use swc_common::{chain, Mark};
+    use swc_ecma_parser::{Syntax, TsConfig};
+    use swc_ecma_transforms_base::resolver;
+    use swc_ecma_transforms_testing::{test_fixture, FixtureTestConfig};
+    use swc_ecma_visit::{as_folder, Fold, VisitMut};
     use testing::fixture;
 
     #[fixture("src/tests/fixture/**/input.ts")]
