@@ -16,9 +16,6 @@ Lazily initialize values by deferring their creation until first use, resulting 
   - [lazyAsync](#methods)
 - [Caching](#caching)
 - [Freezing](#freezing)
-- [Old Versions](#old-versions)
-  - [Next.js](#next-js-old-versions)
-  - [SWC](#swc-old-versions)
 - [License](#license)
 
 <!-- * [FAQ](#faq) -->
@@ -31,25 +28,22 @@ This library **requires** your code is transpilied with [SWC](https://swc.rs).
 - If you are using [Next.js](#https://nextjs.org/docs/advanced-features/compiler), this is the default compiler since `v12`.<br>
 - Otherwise, if your project is not yet configured to use [SWC](https://swc.rs), see [SWC - Getting Started](#https://swc.rs/docs/getting-started).
 
-> Support for babel/webpack may be added in the future.
+> Support for esbuild may be added in the future.
 
 <h3 id="next-js-setup">Next.js</h3>
 
-| Version           |          Supported           |
-| :---------------- | :--------------------------: |
-| `>= 13.3.2`       |              ✅              |
-| `13.2.4 ~ 13.3.1` |            :bug:             |
-| `<= 13.2.3`       | [See](#next-js-old-versions) |
+| Version                 |           Plugin            |
+| :---------------------- | :-------------------------: |
+| `>= v13.4.20-canary.32` | `@lazy-init/plugin-swc-v83` |
+| `>= v13.4.10-canary.1`  | `@lazy-init/plugin-swc-v81` |
 
-> Next.js v13.2.4 ~ v13.3.1 cannot execute SWC Wasm plugins, [due to a bug](https://github.com/vercel/next.js/issues/46989#issuecomment-1486989081).
-
-The `next` package must be installed first and present in your `package.json` **before** installing `lazy-init`.
+<!-- > Next.js v13.2.4 ~ v13.3.1 cannot execute SWC Wasm plugins, [due to a bug](https://github.com/vercel/next.js/issues/46989#issuecomment-1486989081). -->
 
 ```bash
 # using npm
-npm install lazy-init && npm install --save-dev @lazy-init/nextjs-plugin
+npm install lazy-init && npm install --save-dev @lazy-init/plugin-swc-{{version}}
 # using pnpm
-pnpm add lazy-init && pnpm add -D @lazy-init/nextjs-plugin
+pnpm add lazy-init && pnpm add -D @lazy-init/plugin-swc-{{version}}
 ```
 
 Add the following to your next config file:
@@ -61,7 +55,7 @@ module.exports = {
    experimental: {
       swcPlugins: [
          // empty config object `{}` is required.
-         [require.resolve('@lazy-init/nextjs-plugin'), {}],
+         [require.resolve('@lazy-init/plugin-swc-{{version}}'), {}],
       ],
    },
 }
@@ -77,7 +71,7 @@ export default {
    experimental: {
       swcPlugins: [
          // empty config object `{}` is required.
-         [require.resolve('@lazy-init/nextjs-plugin'), {}],
+         [require.resolve('@lazy-init/plugin-swc-{{version}}'), {}],
       ],
    },
 }
@@ -85,18 +79,16 @@ export default {
 
 <h3 id="swc-setup">SWC - @swc/core</h3>
 
-| Version     |        Supported         |
-| :---------- | :----------------------: |
-| `>= 1.3.49` |            ✅            |
-| `<= 1.3.48` | [See](#swc-old-versions) |
-
-The `@swc/core` package must be installed first and present in your `package.json` **before** installing `lazy-init`.
+| Version     |          Supported          |
+| :---------- | :-------------------------: |
+| `>= 1.3.81` | `@lazy-init/plugin-swc-v83` |
+| `>= 1.3.68` | `@lazy-init/plugin-swc-v81` |
 
 ```bash
 # using npm
-npm install lazy-init && npm install --save-dev @lazy-init/swc-core-plugin 
+npm install lazy-init && npm install --save-dev @lazy-init/plugin-swc-{{version}} 
 # using pnpm
-pnpm add lazy-init && pnpm add -D @lazy-init/swc-core-plugin
+pnpm add lazy-init && pnpm add -D @lazy-init/plugin-swc-{{version}}
 ```
 
 The empty config object `{}` is required.
@@ -107,7 +99,7 @@ The empty config object `{}` is required.
    "jsc": {
       "experimental": {
          "plugins": [
-            ["@lazy-init/swc-core-plugin", {}]
+            ["@lazy-init/plugin-swc-{{version}}", {}]
          ]
       }
    }
@@ -288,23 +280,6 @@ foo.obj = {} // error
 ### None
 
 The value will not be frozen.
-
-## Old Versions
-
-To use older versions compatible with your framework, install the plugin using its exact version.
-
-<h3 id="next-js-old-versions">Next.js</h3>
-
-| Version           |             Install              |
-| :---------------- | :------------------------------: |
-| `13.1.4 ~ 13.2.3` | `@lazy-init/nextjs-plugin@2.2.0` |
-
-<h3 id="swc-old-versions">SWC - @swc/core</h3>
-
-| Version           |             Install              |
-| :---------------- | :------------------------------: |
-| `1.3.40 ~ 1.3.42` | `@lazy-init/nextjs-plugin@2.2.0` |
-| `1.3.29 ~ 1.3.38` | `@lazy-init/nextjs-plugin@2.2.0` |
 
 ## License
 
