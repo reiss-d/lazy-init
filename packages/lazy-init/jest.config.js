@@ -12,7 +12,7 @@ const config = {
             parser: { 'syntax': 'typescript' },
             experimental: {
                plugins: [
-                  ['@lazy-init/plugin-swc-v83', {}],
+                  ['@lazy-init/plugin-swc-v81', {}],
                ],
             },
          },

@@ -10,12 +10,12 @@
    },
    "dependencies": {
       "lazy-init": "workspace:*",
-      "next": "13.4.20-canary.39",
+      "next": "13.4.19",
       "react": "18.2.0",
       "react-dom": "18.2.0"
    },
    "devDependencies": {
-      "@lazy-init/plugin-swc-v83": "workspace:*",
+      "@lazy-init/plugin-swc-v81": "workspace:*",
       "@types/node": "^18.16.3",
       "@types/react": "^18.2.0",
       "@types/react-dom": "^18.2.1",

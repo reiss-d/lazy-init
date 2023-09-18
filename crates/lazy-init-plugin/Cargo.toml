@@ -19,12 +19,12 @@ use-plugin_transform = [
 ]
 
 [dependencies]
-swc_atoms = "0.5.9"
-swc_common = "0.32.1"
-swc_core = { version = "0.83.14", optional = true }
-swc_ecma_ast = "0.109.1"
-swc_ecma_utils = "0.123.0"
-swc_ecma_visit = "0.95.1"
+swc_atoms = "=0.5.9"
+swc_common = "=0.32.1"
+swc_core = { version = "=0.81.8", optional = true }
+swc_ecma_ast = "=0.108.0"
+swc_ecma_utils = "=0.121.1"
+swc_ecma_visit = "=0.94.0"
 
 rand = { version = "0.8.5", optional = true }
 serde = { version = "=1.0.188", features = ["derive"] }
@@ -32,8 +32,8 @@ serde_json = "1"
 tracing = { version = "0.1.37", features = ["release_max_level_off"] }
 
 [dev-dependencies]
-swc_ecma_parser = "0.140.0"
-swc_ecma_transforms_base = "0.133.2"
-swc_ecma_transforms_testing = "0.136.1"
+swc_ecma_parser = "=0.138.1"
+swc_ecma_transforms_base = "=0.131.2"
+swc_ecma_transforms_testing = "=0.134.2"
 
 testing = "0.34.1"

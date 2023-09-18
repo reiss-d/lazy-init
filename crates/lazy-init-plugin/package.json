@@ -1,5 +1,5 @@
 {
-   "name": "@lazy-init/plugin-swc-v83",
+   "name": "@lazy-init/plugin-swc-v81",
    "version": "1.0.1",
    "license": "MIT",
    "description": "SWC plugin for use with lazy-init.",

@@ -3,7 +3,7 @@ const nextConfig = {
    reactStrictMode: true,
    experimental: {
       swcPlugins: [
-         [require.resolve('@lazy-init/plugin-swc-v83'), {}],
+         [require.resolve('@lazy-init/plugin-swc-v81'), {}],
       ],
    },
 }
