@@ -30,6 +30,9 @@ This library **requires** your code is transpilied with [SWC](https://swc.rs).
 
 > Support for esbuild may be added in the future.
 
+If you require a version of next/swc unsupported by the plugin and it is listed [here](https://swc.rs/docs/plugin/selecting-swc-core),
+create an issue requesting support.
+
 <h3 id="next-js-setup">Next.js</h3>
 
 | Version                 |           Plugin            |
