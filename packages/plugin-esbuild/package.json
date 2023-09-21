@@ -18,7 +18,8 @@
    "scripts": {
       "build": "pnpm clean && tsup-node --config tsup.config.ts",
       "clean": "shx rm -rf dist && shx mkdir -p dist && pnpm copy",
-      "copy": "shx cp package.json LICENSE dist"
+      "copy": "shx cp package.json LICENSE dist",
+      "release": ""
    },
    "dependencies": {
       "@lazy-init/plugin-swc-v83": "workspace:*",
