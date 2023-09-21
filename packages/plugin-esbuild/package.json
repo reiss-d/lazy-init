@@ -1,6 +1,6 @@
 {
    "name": "@lazy-init/esbuild-plugin",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "license": "MIT",
    "description": "ESBuild plugin for use with lazy-init.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
