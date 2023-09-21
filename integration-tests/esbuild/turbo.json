@@ -6,9 +6,9 @@
          "dependsOn": ["^build", "test:copy"],
          "inputs": [
             "src/**",
+            "build.js",
             "jest.config.js",
-            "tsconfig.json",
-            ".swcrc"
+            "tsconfig.json"
          ],
          "outputs": ["dist/**"],
          "outputMode": "new-only"
