@@ -1,5 +1,5 @@
 {
-   "name": "@lazy-init/plugin-esbuild",
+   "name": "@lazy-init/esbuild-plugin",
    "version": "1.0.0",
    "license": "MIT",
    "description": "ESBuild plugin for use with lazy-init.",
@@ -18,18 +18,16 @@
    "scripts": {
       "build": "pnpm clean && tsup-node --config tsup.config.ts",
       "clean": "shx rm -rf dist && shx mkdir -p dist && pnpm copy",
-      "copy": "shx cp package.json LICENSE dist",
-      "test": "jest"
+      "copy": "shx cp package.json LICENSE dist"
    },
    "dependencies": {
+      "@lazy-init/plugin-swc-v83": "workspace:*",
+      "@swc/core": "1.3.85",
+      "minimatch": "^9.0.3",
       "uft": "^0.1.3"
    },
    "devDependencies": {
-      "@lazy-init/plugin-swc-v83": "workspace:*",
-      "@swc/cli": "^0.1.62",
-      "@swc/core": "1.3.85",
-      "@swc/helpers": "^0.5.2",
-      "@swc/jest": "^0.2.29",
+      "esbuild": "^0.19.3",
       "eslint-config-internal-ts": "workspace:*",
       "eslint-plugin-lazy-init": "workspace:*",
       "tsconfig": "workspace:*",

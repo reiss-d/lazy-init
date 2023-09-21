@@ -1,21 +1,5 @@
 {
    "$schema": "https://turbo.build/schema.json",
    "extends": ["//"],
-   "pipeline": {
-      "build": {
-         "dependsOn": ["^build", "@lazy-init/plugin-swc-v83#build"],
-         "inputs": [
-            "src/**/*.ts",
-            "src/**/*.tsx",
-            "tsup.config.ts",
-            "tsconfig.json",
-            "tsconfig.build.json"
-         ]
-      },
-      "test": {
-         "dependsOn": ["build"],
-         "env": ["LAZY_INIT_DEV_NO_CACHE", "LAZY_INIT_FREEZE_MODE"],
-         "outputs": []
-      }
-   }
+   "pipeline": {}
 }
