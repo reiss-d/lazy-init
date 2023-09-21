@@ -4,7 +4,7 @@
 const config = {
    displayName: 'lazy-init',
    testEnvironment: 'node',
-   testMatch: ['**/tests/**/?(*.)+(spec|test).[jt]s?(x)'],
+   testMatch: ['**/tests/**/*.spec.[jt]s?(x)'],
    transform: {
       '^.+\\.tsx?$': ['@swc/jest', {
          jsc: {
