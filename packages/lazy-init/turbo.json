@@ -3,7 +3,7 @@
    "extends": ["//"],
    "pipeline": {
       "build": {
-         "dependsOn": ["^build", "lazy-init-plugin#build"],
+         "dependsOn": ["^build"],
          "inputs": [
             "src/**/*.ts",
             "src/**/*.tsx",

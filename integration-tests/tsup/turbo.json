@@ -7,8 +7,8 @@
          "inputs": [
             "src/**",
             "jest.config.js",
-            "tsconfig.json",
-            ".swcrc"
+            "tsup.config.ts",
+            "tsconfig.json"
          ],
          "outputs": ["dist/**"],
          "outputMode": "new-only"
