@@ -4,6 +4,9 @@ temp
 .turbo
 .swc
 
+# copied test files
+/integration-tests/*/src
+
 # generated typedocs
 docs
 

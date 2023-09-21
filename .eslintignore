@@ -5,4 +5,6 @@ temp
 **/*.eslintrc.js
 /crates
 typedoc.ts
+integration-tests/copy-tests.js
 integration-tests/integration-test.js
+integration-tests/esbuild/build.js
