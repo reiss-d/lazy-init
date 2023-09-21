@@ -24,10 +24,24 @@
             "src/**/*.ts",
             "src/**/*.tsx",
             "tests/**/*.ts",
+            "tests/**/*.tsx",
             "jest.config.js",
             "tsconfig.json"
          ],
          "outputs": [],
+         "outputMode": "new-only"
+      },
+      "test:copy": {
+         "dependsOn": [],
+         "inputs": [
+            "../copy-tests.js",
+            "../../packages/lazy-init/tests/**/*.ts",
+            "../../packages/lazy-init/tests/**/*.tsx"
+         ],
+         "outputs": [
+            "src/**/*.ts",
+            "src/**/*.tsx"
+         ],
          "outputMode": "new-only"
       },
       "dev": {
