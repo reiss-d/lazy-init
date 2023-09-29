@@ -6,9 +6,11 @@ Lazily initialize values by deferring their creation until first use, resulting 
 
 - [Overview](#overview)
 - [Installation](#installation)
-  - [Next.js](#next-js-setup)
-  - [SWC](#swc-setup)
-  - [Eslint](#eslint-setup)
+  - [Next.js](#nextjs)
+  - [SWC](#swc---swccore)
+  - [esbuild](#eslint)
+  - [tsup](#tsup)
+  - [eslint](#eslint)
 - [Basic Usage](#basic-usage)
 - [Methods](#methods)
   - [lz](#methods)
@@ -23,17 +25,16 @@ Lazily initialize values by deferring their creation until first use, resulting 
 
 ## Installation
 
-This library **requires** your code is transpilied with [SWC](https://swc.rs).
+This library **requires** your code is transpilied with any of the following:
 
-- If you are using [Next.js](#https://nextjs.org/docs/advanced-features/compiler), this is the default compiler since `v12`.<br>
-- Otherwise, if your project is not yet configured to use [SWC](https://swc.rs), see [SWC - Getting Started](#https://swc.rs/docs/getting-started).
-
-> Support for esbuild may be added in the future.
+- [SWC](https://swc.rs) (includes [Next.js](https://nextjs.org/docs/advanced-features/compiler))
+- [esbuild](https://github.com/evanw/esbuild)
+- [tsup](https://github.com/egoist/tsup)
 
 If you require a version of next/swc unsupported by the plugin and it is listed [here](https://swc.rs/docs/plugin/selecting-swc-core),
 create an issue requesting support.
 
-<h3 id="next-js-setup">Next.js</h3>
+### Next.js
 
 | Version                 |           Plugin            |
 | :---------------------- | :-------------------------: |
@@ -80,7 +81,7 @@ export default {
 }
 ```
 
-<h3 id="swc-setup">SWC - @swc/core</h3>
+### SWC - @swc/core
 
 | Version     |          Supported          |
 | :---------- | :-------------------------: |
@@ -109,9 +110,83 @@ The empty config object `{}` is required.
 }
 ```
 
-<h3 id="eslint-setup">Eslint</h3>
+### esbuild
 
-This step is only necessary if you are using [@typescript-eslint](#https://typescript-eslint.io/) and your configuration extends rules that [require type checking](#https://typescript-eslint.io/linting/typed-linting).
+<!-- TODO: document bundle performance impact of esbuild/tsup plugin -->
+
+| Version              |          Supported          |
+| :------------------- | :-------------------------: |
+| `0.18.x \|\| 0.19.x` | `@lazy-init/esbuild-plugin` |
+
+```bash
+# using npm
+npm install lazy-init && npm install --save-dev @lazy-init/esbuild-plugin
+# using pnpm
+pnpm add lazy-init && pnpm add -D @lazy-init/esbuild-plugin
+```
+
+The `include` and `exclude` properties are glob arrays which follow the same
+behaviour as [include](https://www.typescriptlang.org/tsconfig#include) and
+[exclude](https://www.typescriptlang.org/tsconfig#exclude) in Typescripts `tsconfig.json`.
+
+These options are not required. However, providing either will improve performance.
+
+By default, imports from `node_modules` will be skipped by this plugin unless
+`excludeNodeModules` is set to `false`.
+
+```js
+// your build file
+const { lazyInitPlugin } = require('@lazy-init/esbuild-plugin')
+const esbuild = require('esbuild')
+
+esbuild.build({
+   // ... other options
+   plugins: [
+      // If you are using plugins that transform paths, place them first.
+      lazyInitPlugin({
+         include: ['src'],
+         exclude: ['src/**/*.test.ts'],
+         excludeNodeModules: true, // default
+      }),
+   ],
+})
+```
+
+### tsup
+
+tsup uses esbuild internally, therefore everything documented in the
+[esbuild section](#esbuild) applies here. The only difference
+is a slight change in the configuration.
+
+| Version    |          Supported          |
+| :--------- | :-------------------------: |
+| `>= 7.x.x` | `@lazy-init/esbuild-plugin` |
+
+> Note: just copy the `include` and `exclude` arrays from your `tsconfig.json`.
+
+```ts
+// tsup.config.ts
+import { lazyInitPlugin } from '@lazy-init/esbuild-plugin'
+import { defineConfig } from 'tsup'
+
+export default defineConfig({
+   // ... other options
+   esbuildPlugins: [
+      // If you are using plugins that transform paths, place them first.
+      lazyInitPlugin({
+         include: ['src'],
+         exclude: ['src/**/*.test.ts'],
+         excludeNodeModules: true, // default
+      }),
+   ],
+})
+```
+
+### eslint
+
+This step is only necessary if you are planning on using the `lz.async` method
+and have [@typescript-eslint](#https://typescript-eslint.io/) with rules
+that [require type checking](#https://typescript-eslint.io/linting/typed-linting).
 
 ```bash
 # using npm
