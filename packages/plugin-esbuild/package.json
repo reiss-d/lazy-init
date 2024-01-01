@@ -25,14 +25,14 @@
       "@lazy-init/plugin-swc-v83": "workspace:*",
       "@swc/core": "1.3.85",
       "minimatch": "^9.0.3",
-      "uft": "^0.1.3"
+      "uft": "^0.2.0"
    },
    "devDependencies": {
-      "esbuild": "^0.19.3",
+      "esbuild": "^0.19.11",
       "eslint-config-internal-ts": "workspace:*",
       "eslint-plugin-lazy-init": "workspace:*",
       "tsconfig": "workspace:*",
       "tsup": "^7.2.0",
-      "typescript": "^5.2.2"
+      "typescript": "^5.3.3"
    }
 }

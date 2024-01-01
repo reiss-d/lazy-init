@@ -47,7 +47,7 @@
       "release": ""
    },
    "dependencies": {
-      "uft": "^0.1.3"
+      "uft": "^0.2.0"
    },
    "devDependencies": {
       "@lazy-init/plugin-swc-v83": "workspace:*",
@@ -59,7 +59,7 @@
       "eslint-plugin-lazy-init": "workspace:*",
       "tsconfig": "workspace:*",
       "tsup": "^7.2.0",
-      "typescript": "^5.2.2"
+      "typescript": "^5.3.3"
    },
    "keywords": [
       "cache",
