@@ -14,14 +14,16 @@
       "build": "pnpm e:dev turbo run build",
       "build:pkgs": "pnpm e:dev turbo run build --filter=./packages/*",
       "build:crates": "pnpm e:dev turbo run build --filter=./crates/*",
+      "build:state-macro": "cargo build -p visitor_state_macro --release",
       "test": "pnpm e:dev pnpm install && turbo run test --continue",
       "test:pkgs": "pnpm e:dev turbo run test --filter=./packages/*",
       "test:crates": "pnpm e:dev turbo run test --filter=./crates/*",
       "test:integration": "pnpm e:dev turbo run test --filter=./integration-tests/*",
+      "test:state-macro": "cargo test -p visitor_state_macro --no-default-features -- --show-output",
+      "test:state-macro:expand": "cargo expand -p visitor_state_macro --test macro_test",
       "typedoc": "pnpm e:dev turbo run typedoc",
       "bench": "pnpm e:dev turbo run bench --filter=./packages/benchmark",
-      "release": "pnpm e:prod turbo run release --no-cache --force && pnpm publish -r",
-      "plugin:postinstall": "pnpm e:dev pnpm install"
+      "release": "pnpm e:prod turbo run release --no-cache --force && pnpm publish -r"
    },
    "devDependencies": {
       "@types/jest": "^29.5.11",
@@ -36,8 +38,8 @@
       "json": "^11.0.0",
       "shelljs": "^0.8.5",
       "shx": "^0.3.4",
-      "turbo": "^1.11.2",
-      "typedoc": "^0.25.5",
+      "turbo": "^1.11.3",
+      "typedoc": "^0.25.7",
       "typedoc-plugin-markdown": "4.0.0-next.20",
       "typedoc-plugin-missing-exports": "^2.1.0",
       "typescript": "^5.3.3"

@@ -2,7 +2,11 @@
 
 Lazily initialize values by deferring their creation until first use, resulting in better performance.
 
+### Now also bringing block expressions to JavaScript/TypeScript.
+
 ## Index
+
+<!-- TODO: add Plugin Config section. -->
 
 - [Overview](#overview)
 - [Installation](#installation)
@@ -13,6 +17,7 @@ Lazily initialize values by deferring their creation until first use, resulting 
   - [eslint](#eslint)
 - [Basic Usage](#basic-usage)
 - [Methods](#methods)
+  - [block](#methods)
   - [lz](#methods)
   - [lazyFn](#methods)
   - [lazyAsync](#methods)
@@ -236,6 +241,7 @@ console.log(first === second) // true
 
 Click the method to see its documentation:
 
+- [`block`](https://github.com/reiss-d/lazy-init/blob/main/packages/lazy-init/src/methods/block/README.md)
 - [`lz`](https://github.com/reiss-d/lazy-init/blob/main/packages/lazy-init/src/methods/obj/README.md)
 - [`lz.fn`](https://github.com/reiss-d/lazy-init/blob/main/packages/lazy-init/src/methods/fn/README.md)
 - [`lz.async`](https://github.com/reiss-d/lazy-init/blob/main/packages/lazy-init/src/methods/async/README.md)

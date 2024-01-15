@@ -1,5 +1,7 @@
 export { lazyAsync } from './async'
 export type { LazyAsyncFn, LazyAsyncOptions } from './async'
+export { block } from './block'
+export type { Block } from './block'
 export { lazyFn } from './fn'
 export type { LazyFn, LazyFnOptions } from './fn'
 export { lazyObj, lazyObjCached } from './obj'

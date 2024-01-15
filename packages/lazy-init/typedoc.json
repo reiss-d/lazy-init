@@ -5,7 +5,8 @@
       "src/options.ts",
       "src/methods/obj/index.ts",
       "src/methods/async/index.ts",
-      "src/methods/fn/index.ts"
+      "src/methods/fn/index.ts",
+      "src/methods/block/index.ts"
    ],
    "entryPointStrategy": "resolve",
    "out": "docs",
