@@ -1,6 +1,6 @@
 {
    "name": "lazy-init",
-   "version": "4.0.0",
+   "version": "4.1.0",
    "license": "MIT",
    "description": "Lazily initialize values by deferring their creation until first use, resulting in better performance.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
