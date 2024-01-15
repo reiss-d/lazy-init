@@ -1,7 +1,9 @@
 [workspace]
 members = [
   "crates/lazy-init-plugin",
+  "crates/visitor_state_macro",
 ]
+resolver = "2"
 
 [profile.dev]
 incremental = true

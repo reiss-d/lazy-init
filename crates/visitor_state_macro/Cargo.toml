@@ -1,0 +1,16 @@
+[package]
+name = "visitor_state_macro"
+version = "1.0.0"
+authors = ["Reiss Davidson <https://github.com/reiss-d>"]
+edition = "2021"
+license = "MIT"
+publish = false
+description = "Helper macro for implementing the visitor pattern with state that should be saved and restored."
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1"
+quote = "1"
+syn = { version = "2", features = ["full"] }
