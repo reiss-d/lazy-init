@@ -3,21 +3,27 @@
    "extends": ["//"],
    "pipeline": {
       "build": {
-         "dependsOn": ["^build"],
+         "dependsOn": [],
          "inputs": [
             "src/**",
             "!src/tests/**",
             "Cargo.toml",
+            "../visitor_state_macro/src/**",
+            "../visitor_state_macro/Cargo.toml",
             "../../.cargo/config.toml"
-         ]
+         ],
+         "outputs": ["dist/**"]
       },
       "test": {
-         "dependsOn": ["^build"],
+         "dependsOn": [],
          "inputs": [
             "src/**",
             "Cargo.toml",
+            "../visitor_state_macro/src/**",
+            "../visitor_state_macro/Cargo.toml",
             "../../.cargo/config.toml"
-         ]
+         ],
+         "outputs": []
       }
    }
 }

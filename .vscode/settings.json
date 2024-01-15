@@ -22,26 +22,11 @@
       "**/.swc": true
    },
    "typescript.tsdk": "node_modules/typescript/lib",
-   "rust-analyzer.check.allTargets": false,
-   "rust-analyzer.cargo.features": [
-      // "use-plugin_transform",
-      "use-testing"
-   ],
-   "rust-analyzer.check.overrideCommand": [
-      "cargo",
-      "+nightly",
-      "clippy",
-      "--workspace",
-      "--features",
-      // "use-plugin_transform",
-      "use-testing",
-      "--all-targets",
-      "--tests",
-      "--examples",
-      "--benches",
-      "--message-format=json",
-      "--",
-      "-D",
-      "clippy::all"
-   ]
+   "rust-analyzer.check.command": "clippy"
+   // "rust-analyzer.check.features": [
+   //    "use-plugin_transform"
+   // ],
+   // "rust-analyzer.cargo.features": [
+   //    "use-plugin_transform"
+   // ]
 }
