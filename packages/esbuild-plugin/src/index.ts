@@ -1,4 +1,4 @@
-import { transform } from '@swc/core'
+import { type ParserConfig, transform } from '@swc/core'
 import type { OnLoadArgs, PluginBuild } from 'esbuild'
 import { readFile } from 'fs/promises'
 import { extname } from 'path'
@@ -25,16 +25,19 @@ export function lazyInitPlugin(options: Options = {}): Plugin {
    options = normalizeOptions(options)
 
    const applyTransform: Transform = async (code, ext) => {
-      const syntax = ext === 'ts' || ext === 'tsx'
-         ? 'typescript'
-         : 'ecmascript'
+      const isTs = ext === 'ts' || ext === 'tsx'
+      const isJsx = ext === 'tsx' || ext === 'jsx'
+
+      const parser: ParserConfig = isTs
+         ? { syntax: 'typescript', tsx: isJsx }
+         : { syntax: 'ecmascript', jsx: isJsx }
 
       const result = await transform(code, {
          swcrc: false,
          minify: false,
          jsc: {
             target: 'esnext',
-            parser: { syntax },
+            parser,
             preserveAllComments: true,
             keepClassNames: true,
             experimental: {
