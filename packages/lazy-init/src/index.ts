@@ -20,8 +20,7 @@ function createLazy(base: LazyObj): Lazy {
    return lazy
 }
 
-const lazy = /*#__PURE__*/ createLazy(lazyObj)
-const lazyCached = /*#__PURE__*/ createLazy(lazyObjCached)
+export const lz = /*#__PURE__*/ createLazy(lazyObj)
+export const lzc = /*#__PURE__*/ createLazy(lazyObjCached)
 
-export { block, lazy as lz, lazyCached as lzc }
-export default lazy
+export { block }
