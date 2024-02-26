@@ -1,9 +1,8 @@
-import { ESLintUtils } from '@typescript-eslint/utils'
 import * as path from 'path'
+import { RuleTester } from '@typescript-eslint/rule-tester'
 
 function getFixturesRootDir(): string {
    return path.join(__dirname, 'fixtures')
 }
 
-const { RuleTester } = ESLintUtils
 export { getFixturesRootDir, RuleTester }

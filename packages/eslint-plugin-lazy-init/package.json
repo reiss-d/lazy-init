@@ -1,6 +1,6 @@
 {
    "name": "eslint-plugin-lazy-init",
-   "version": "5.0.0",
+   "version": "6.0.0",
    "license": "MIT",
    "description": "Eslint plugin for use with lazy-init.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
@@ -27,15 +27,16 @@
       "tsutils": "^3.21.0"
    },
    "peerDependencies": {
-      "@typescript-eslint/eslint-plugin": "^5.0.0",
-      "@typescript-eslint/parser": "^5.0.0",
-      "@typescript-eslint/utils": "^5.0.0",
-      "eslint": "^6.0.0 || ^7.0.0 || ^8.0.0"
+      "@typescript-eslint/eslint-plugin": "^6.0.0",
+      "@typescript-eslint/parser": "^6.0.0",
+      "@typescript-eslint/utils": "^6.0.0",
+      "eslint": "^7.0.0 || ^8.0.0"
    },
    "devDependencies": {
-      "@typescript-eslint/eslint-plugin": "^5.62.0",
-      "@typescript-eslint/parser": "^5.62.0",
-      "@typescript-eslint/utils": "^5.62.0",
+      "@typescript-eslint/eslint-plugin": "^6.21.0",
+      "@typescript-eslint/parser": "^6.21.0",
+      "@typescript-eslint/utils": "^6.21.0",
+      "@typescript-eslint/rule-tester": "^6.21.0",
       "eslint": "^8.57.0",
       "eslint-config-internal-base": "workspace:*",
       "tsconfig": "workspace:*",

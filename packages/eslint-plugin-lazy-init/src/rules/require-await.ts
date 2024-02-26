@@ -59,7 +59,7 @@ export default createTsRule({
       docs: {
          description:
             'Disallow async functions which have no `await` expression',
-         recommended: 'error',
+         recommended: 'recommended',
          requiresTypeChecking: true,
          extendsBaseRule: true,
       },
@@ -72,7 +72,7 @@ export default createTsRule({
    create(context) {
       const parserServices = ESLintUtils.getParserServices(context)
       const checker = parserServices.program.getTypeChecker()
-      const sourceCode = context.getSourceCode()
+      const sourceCode = context.sourceCode
       let scopeInfo: ScopeInfo | null = null
 
       /**

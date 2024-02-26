@@ -189,27 +189,11 @@ export default defineConfig({
 
 ### eslint
 
-This step is only necessary if you are planning on using the `lz.async` method
-and have [@typescript-eslint](#https://typescript-eslint.io/) with rules
-that [require type checking](#https://typescript-eslint.io/linting/typed-linting).
+This plugin is only necessary if you want to use the `lz.async` method while
+using [@typescript-eslint](https://typescript-eslint.io/) with a configuration
+that extends rules which [require type checking](https://typescript-eslint.io/getting-started/typed-linting).
 
-```bash
-# using npm
-npm install --save-dev eslint-plugin-lazy-init 
-# using pnpm
-pnpm add -D eslint-plugin-lazy-init
-```
-
-```js
-// .eslintrc.js
-module.exports = {
-  extends: {
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    // must come after
-    'plugin:lazy-init/recommended'
-  }
-}
-```
+See [`eslint-plugin-lazy-init`](https://github.com/reiss-d/lazy-init/blob/main/packages/eslint-plugin-lazy-init/README.md).
 
 ## Basic Usage
 
