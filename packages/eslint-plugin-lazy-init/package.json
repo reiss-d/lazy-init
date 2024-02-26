@@ -1,6 +1,6 @@
 {
    "name": "eslint-plugin-lazy-init",
-   "version": "2.1.0",
+   "version": "5.0.0",
    "license": "MIT",
    "description": "Eslint plugin for use with lazy-init.",
    "homepage": "https://github.com/reiss-d/lazy-init#readme",
@@ -16,7 +16,9 @@
    ],
    "sideEffects": false,
    "scripts": {
-      "build": "tsc -b tsconfig.build.json",
+      "build": "pnpm clean && tsc -b tsconfig.build.json",
+      "clean": "shx rm -rf dist && shx mkdir -p dist && pnpm copy",
+      "copy": "shx cp README.md package.json LICENSE dist && json -I -f dist/package.json -e \"this.devDependencies=undefined; this.scripts=undefined;\"",
       "test": "jest",
       "release": ""
    },
@@ -34,7 +36,7 @@
       "@typescript-eslint/eslint-plugin": "^5.62.0",
       "@typescript-eslint/parser": "^5.62.0",
       "@typescript-eslint/utils": "^5.62.0",
-      "eslint": "^8.49.0",
+      "eslint": "^8.57.0",
       "eslint-config-internal-base": "workspace:*",
       "tsconfig": "workspace:*",
       "typescript": "^5.3.3"
