@@ -367,6 +367,8 @@ The value will not be frozen.
 
 ## License
 
-See [license](./LICENSE).
+This repository is licensed under the MIT License found [here](./LICENSE).
+Each package/crate may contain a LICENSE file in its root which takes precedence
+and may include or depend on third-party code with its own licensing conditions.
 
 ---

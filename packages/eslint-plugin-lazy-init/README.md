@@ -10,7 +10,7 @@ This plugin is only necessary if you are using [@typescript-eslint](#https://typ
 # using npm
 npm install --save-dev eslint-plugin-lazy-init 
 # using pnpm
-pnpm add -D eslint-plugin-lazy-init 
+pnpm add -D eslint-plugin-lazy-init
 ```
 
 ```js

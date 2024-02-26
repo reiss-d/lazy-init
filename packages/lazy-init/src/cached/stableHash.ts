@@ -1,14 +1,15 @@
-/*
- * This file contains a modified version of the `stableHash` function from
- * Vercel's `swr` package.
+/**
+ * This file contains modified code from the `swr` package, specifically the
+ * `stableHash` function.
  *
- * The original source code can be found here:
+ * Source:
  * https://github.com/vercel/swr/blob/589550bd0ff9532c720faf80d1ff7212ec157b15/_internal/utils/hash.ts
  *
- * `swr` is licensed under this MIT License:
- *
+ * License:
  * MIT License
+ *
  * Copyright (c) 2023 Vercel, Inc.
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
